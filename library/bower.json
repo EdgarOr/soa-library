@@ -1,0 +1,18 @@
+{
+  "name": "library",
+  "description": "",
+  "main": "/bin/www",
+  "authors": [
+    "Victor Daniel Rebolloso Degante <vrebo.deg@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
