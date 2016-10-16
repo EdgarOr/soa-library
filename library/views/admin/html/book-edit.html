@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bower_components/bootstrap-select/dist/css/bootstrap-select.min.css">
+    <link href="/public/css/custom.css" rel="stylesheet"></head>
+<style>
+    body {
+        background: #f1f1f1!important;
+    }
+    
+    #main-content {
+        height: calc(100vh - 50px);
+        overflow: scroll;
+    }
+    
+    .nopadding {
+        padding: 0px !important;
+        margin: 0 !important;
+    }
+    
+    .fill {
+        height: calc(100vh - 50px);
+        padding: 16px;
+        background: white;
+    }
+    
+    .overflow {
+        overflow-y: scroll;
+        overflow-x: auto;
+    }
+    
+    .options-menu {
+        cursor: pointer;
+    }
+    
+    .popup-list-item {
+        margin: 0px;
+        border: 0px solid;
+    }
+    
+    .btn {
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    
+    .navbar-fixed-bottom {
+        margin: 0px;
+    }
+    
+     .btn-traslucid {
+            background-color: transparent;
+        }
+</style>
+
+<body>
+    <div class="container-fluid">
+        <!-- SESSION BAR -->
+        <header class="row">
+            <div class="col-sm-12 nopadding">
+                <div class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button class="navbar-toggle" data-toggle="collapse" data-target="#sessionBar"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="navbar-brand" href="#">LIBRARIAN APP</a> </div>
+                        <div class="collapse navbar-collapse" id="sessionBar">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- BOTTOM BAR -->
+        <div class="btn-group btn-group-justified navbar-fixed-bottom panel panel-default visible-xs visible-sm">
+            <div class="dropup btn"> <a href="#" class="dropdown-toggle" id="dropdownBook" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h3 style="margin:0px;" ><span class="glyphicon glyphicon-book"></span></h3> </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownBook">
+                    <li class="dropdown-header">Book</li>
+                    <li><a href="/admin/book/list">Consult</a></li>
+                    <li><a href="/admin/book/new">Add</a></li>
+                </ul>
+            </div>
+            <div class="dropup btn"> <a href="#" class="dropdown-toggle" id="dropdownCategory" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h3 style="margin:0px;"><span class="glyphicon glyphicon-tags"></span></h3>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownCategory">
+                    <li class="dropdown-header">Category</li>
+                    <li><a href="/admin/category/list">Consult</a></li>
+                    <li><a href="/admin/category/new">Add</a></li>
+                </ul>
+            </div>
+            <div class="dropup btn"> <a href="#" class="dropdown-toggle" id="dropdownUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h3 style="margin:0px;"><span class="glyphicon glyphicon-user"></span></h3> </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownUser">
+                    <li class="dropdown-header">User</li>
+                    <li><a href="/admin/user/list">Consult</a></li>
+                    <li><a href="/admin/user/new">Add</a></li>
+                    <li><a href="#">Lend a book</a></li>
+                </ul>
+            </div>
+            <div class="btn dropup"> <a href="#" lass="dropdown-toggle" id="dropdownLending" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><h3 style="margin:0px;"><span class="glyphicon glyphicon-time"></span></h3> </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownLending">
+                    <li class="dropdown-header">Lenginds</li>
+                    <li><a href="#">Consult</a></li>
+                    <li><a href="#">Add</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- SIDEBAR -->
+        <aside class="col-md-2 hiden-xs">
+            <div class="panel panel-default panel-group visible-md visible-lg sidebar" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Book</a>
+        </h4> </div>
+                    <div id="collapse1" class="panel-collapse collapse">
+                        <ul class="list-group panel-body nopadding">
+                            <li class="list-group-item"><a href="/admin/book/new" class="btn-block">Add</a></li>
+                            <li class="list-group-item"><a href="/admin/book/list" class="btn-block">Consult</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Category</a>
+        </h4> </div>
+                    <div id="collapse2" class="panel-collapse collapse">
+                        <ul class="list-group panel-body nopadding">
+                            <li class="list-group-item"><a href="/admin/category/new" class="btn-block">Add</a></li>
+                            <li class="list-group-item"><a href="/admin/category/list" class="btn-block">Consult</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">User</a>
+        </h4> </div>
+                    <div id="collapse3" class="panel-collapse collapse">
+                        <ul class="list-group panel-body nopadding">
+                            <li class="list-group-item"><a href="/admin/user/new" class="btn-block">Add</a></li>
+                            <li class="list-group-item"><a href="/admin/user/list" class="btn-block">Consult</a></li>
+                            <li class="list-group-item"><a href="#" class="btn-block">Lend a book</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Lending</a>
+        </h4> </div>
+                    <div id="collapse4" class="panel-collapse collapse">
+                        <ul class="list-group panel-body nopadding">
+                            <li class="list-group-item"><a href="#" class="btn-block">Add</a></li>
+                            <li class="list-group-item"><a href="#" class="btn-block">Consult</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+    
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/bower_components/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.options-menu').popover({
+                content: "<div class='list-group'><a href='#' class='list-group-item popup-list-item'><span class='glyphicon glyphicon-edit'></span> Edit</a><a href='#' class='list-group-item popup-list-item'><span class='glyphicon glyphicon-trash'></span> Delete</a></div>"
+                , html: true
+                , placement: "bottom"
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,220 @@
+\documentclass[10pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{authblk}
+\usepackage[spanish]{babel}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage[bottom]{footmisc}
+
+\title{Guía para el Desarrollo de Aplicaciones Web Responsivas Utilizando el Stack MEAN}
+\author[1]{Héctor Andrade \thanks{handrade@itver.edu.mx}}
+\author[1]{Victor Rebolloso \thanks{vrebo.deg@gmail.com}}
+
+\affil[1]{Department of Computer Science, \LaTeX\ University}
+\affil[2]{Department of Mechanical Engineering, \LaTeX\ University}
+
+\renewcommand\Authands{ y }
+\begin{document}
+\maketitle
+
+\begin{abstract}
+El presente documento pretende ser una guía para el desarrollo de aplicaciones web utilizando el stack MEAN (MongoDB, Express, AngularJS, Node.js).
+\end{abstract}
+
+\tableofcontents
+
+\chapter{Desarrollo de Aplicaciones Web Responsivas}
+
+\section{Introducción}
+Es indudable que el uso de dispositivos móviles para la navegación en la web ha crecido de manera explosiva recientemente, y que esta tendencia continuará en los próximos años. El desarrollo de aplicaciones web que se adapten a este tipo de dispositivos es prácticamente una obligación para las empresas que desean de alguna forma interactuar con clientes o con el público en general a través de la web.
+
+El diseño web responsivo o adaptivo como algunos autores lo llaman, consiste en diseñar y desarrollar aplicaciones para la web que puedan adaptarse a diferentes tipos de dispositivos desde pequeños dispositivos móviles hasta computadoras con monitores de gran tamaño.
+
+El diseño responsivo no solo trata de ajustar la interface del usuario al tamaño de la pantalla. Algunos aspectos a considerar son también el comportamiento del usuario, la plataforma y tipo del dispositivo móvil  e incluso la orientación.
+
+La implementación de  un diseño responsivo consiste en el uso adecuado de tecnologías tales como HTML, CSS y marcos de trabajo como Bootstrap  y Foundation entre otros.
+
+En esta guía mostraremos los conceptos, patrones arquitectónicos  y algunas de las  tecnologías y herramientas emergentes más utilizadas en el desarrollo de aplicaciones web responsivas. El primer concepto que veremos es el del patrón arquitectónico Modelo Vista Controlador. 
+
+
+\section{Patrón Arquitectónico MVC}
+
+Un patrón arquitectónico es una descripción abstracta de una arquitectura de software que ha sido utilizada exitosamente y que es producto de buenas prácticas de desarrollo de software.  En esencia, el patrón de diseño Modelo Vista Controlador (MVC) consiste en dividir conceptualmente la arquitectura de un sistema y, en la medida de lo posible, la implementación de la misma en componentes que pertenezcan a una de tres categorías, Modelo, Vista y Controlador.
+
+Dentro de la categoría de Modelo se ubican aquellos componentes encargados de: encapsular los datos utilizados en el sistema, representar el comportamiento de las entidades involucradas en los procesos de negocio del sistema y realizar tareas de persistencia de datos.
+
+La categoría de Vista contiene los componentes con los que el usuario interactuará directamente, comúnmente también se les refiere como el Front-End del sistema. Es importante notar la independencia entre la vista y el modelo. Modificaciones en los componentes que pertenecen a la vista no necesariamente implican modificaciones en el modelo y viceversa.
+
+Por último, los componentes pertenecientes a la categoría Controlador se encargan de atender las peticiones del usuario solicitadas a través de los componentes de la Vista haciendo uso de los componentes del Modelo. Los controladores son el puente entre el Modelo y la Vistas del sistema. 
+
+Algunos de los beneficios de desarrollar un sistema bajo el patrón MVC son:
+
+\begin{itemize}
+\item Simplifica el desarrollo brindando desglosando su arquitectura.
+\item Separa las distintas responsabilidades (lógica de negocios, interfaz de usuario) de sus componentes.
+\item Contribuye a su mantenibilidad.
+\end{itemize}
+
+\section{HTML}
+El lenguaje de marcado de hipertexto, es un lenguaje basado en etiquetas utilizado para definir la estructura de páginas web y describir su contenido. Las estructuras de documentos HTML siguen una secuencia y una jerarquía, esto significa que un elemento puede seguir después de otro y que un elemento puede contener a otro.
+
+Como todo lenguaje, HTML tiene reglas sintácticas y semánticas las cuales varían dependiendo de la versión en cuestión. La versión más reciente es HTML5. \\
+
+Para profundizar en el tema se recomienda la siguiente lista de referencias:
+\begin{itemize}
+	\item Especificación de HTML5 por la World Wide Web Consortium (W3C)
+	\footnote{\url{www.w3.org/TR/html5/}}.
+	\item Especificación de HTML5 por la  Web Hypertext Application Technology Working Group (WHATWG)
+	\footnote{\url{html.spec.whatwg.org/multipage/}}.
+	\item Excelente tutorial y sitio de referencia
+	\footnote{\url{www.w3schools.com/html/}}.
+\end{itemize}
+
+
+\section{CSS}
+
+Las hojas de estilo en cascada (de su traducción del inglés Cascading Style Sheets) son un mecanismo que permite añadir estilo a los documentos web. Su uso delega la responsabilidad de definir la presentación de los documentos a los archivos CSS y se evita la práctica poco recomendable de añadir estilos mediante los elementos del documento.
+
+CSS es un lenguaje basado reglas, las cuales describen al navegador como presentar los elementos de HTML.
+A diferencia de otros lenguajes, CSS no tiene versiones, en su lugar tiene niveles siendo el último el nivel 3.\\
+
+Enlaces de referencia acerca de CSS:
+\begin{itemize}
+	\item Documento de la W3C recopilatorio de las especificaciones que definen CSS.
+	\footnote{\url{www.w3.org/TR/css-2015/}}.
+	\item Sitio web del grupo de desarrollo de CSS
+	\footnote{\url{www.w3.org/Style/CSS/}}.
+	\item Tutoriales de CSS
+	\footnote{\url{www.w3.org/Style/CSS/learning}}
+	\footnote{\url{www.w3schools.com/css/}}.
+\end{itemize}
+
+
+
+\section{JavaScript}
+
+
+\section{Stack de Desarrollo MEAN}
+
+El stack de desarrollo MEAN es un conjunto de tecnologías de código abierto que permite construir aplicaciones web basadas en el lenguaje JavaScript. Los componentes de este stack son los siguientes:
+
+\begin{description}
+	\item[MongoDB:] Base de datos NoSQL orientada a documentos.
+	
+	\item[Express.js:] Permite el desarrollo de la programación de una aplicación web en el lado del servidor (Back-End ) a través de Interfaces de aplicación (APIs).
+	
+	\item[Angular.js:] Permite la implementación del patrón arquitectónico modelo vista controlador en la programación de los componentes de la Vista.
+	
+	\item[Node.js:] Provee el ambiente de ejecución basado en JavaScript.
+	
+\end{description}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=1\textwidth]{images/stack-mean}
+\end{figure}
+
+\FloatBarrier
+\subsection{MongoDB}
+
+\subsection{Express}
+
+\subsection{AngularJS}
+
+\subsection{Node.js}
+%
+%\subsection{Bootstrap}
+%\subsection{Mongoose}
+
+
+\chapter{Instalación de las Herramientas}
+
+En este capítulo se explica el procedimiento de instalación de las herramientas utilizadas en esta guía y las configuraciones necesarias para su utilización en el sistema operativo Windows. Adicional a lo anterior, se proponen ejemplos que familiarizarán al lector en el uso de las herramientas.
+
+\section{Node.js}
+
+Para instalar Node basta con ejecutar el instalador adecuado para la arquitectura del equipo en que se instalará y seguir la configuración recomendada. Los paquetes de instalación se pueden descargar desde \href{https://nodejs.org/en/download/}{este sitio}.
+
+En la imagen \ref{fig:node-installation} se puede notar que en la instalación de Node se incluye npm. nmp es un administrador de paquetes al estilo apt y yum de Linux o homebrew de OS X para Node.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.65]{images/node-installation}
+	\caption{Configuración sugerida por el instalador de Node en Windows.}\label{fig:node-installation}
+\end{figure}
+
+Una vez terminada la instalación es posible ejecutar programas escritos en JavaScript en una computadora fuera del navegador.
+
+\subsection{Ejemplos}
+
+\subsubsection{Hello World}
+
+\subsubsection{HTML Simple}
+
+\section{Express}
+
+\section{Bower}
+
+\section{Boostrap}
+
+\section{MongoDB}
+
+MongoDB puede obtenerse desde el \href{https://www.mongodb.com/download-center}{centro de descargas} de su sitio web.\\
+
+Su instalación en Windows es sencilla, sólo hay que ejecutar el paquete de instalación descargado y seguir la instalación recomendada. La instalación se realizará en el directorio \textit{C:/Program Files/MongoDB/Server/3.2} o similar, dependiendo de la versión instalada.\\
+
+En la imagen \ref{fig:mongo-directory}, se observa el resultado de la instalación. Dentro de la carpeta \textit{bin} se encuentran los componentes principales y utilerías de MongoDB. Se recomienda la lectura del archivo README en el que se explica claramente la función de algunos de los componentes. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.65]{images/mongo-installation-directory}
+	\caption{Directorio de instalación de MongoDB}\label{fig:mongo-directory}
+\end{figure}
+
+Para poder hacer uso de Mongo desde el Command Prompt o Power Shell de Windows es necesario editar la variable de entorno PATH agregando la ruta de la carpeta \textit{bin} del directorio de instalación de Mongo.
+
+Para modificar la variable PATH se pueden seguir \href{https://support.microsoft.com/en-us/kb/310519}{estos pasos}. En el paso 4 se selecciona la variable PATH, se da click en Editar y se agrega \textit{";C:/Program Files/MongoDB/Server/3.2/bin"} al final del valor de la variable.\\
+
+Para poner a andar MongoDB se utiliza el ejecutable \textbf{mongod} acompañado de la opción \textbf{--dbpath  C:/../whatever/data/db}, esta opción indica al servicio de de Mongo cual es el directorio donde estarán o están contenidas las bases de datos. Es necesario que el directorio exista previo al inicio del servicio \textbf{mongod}.
+
+En la figura \ref{fig:mongod-service} se observa el servicio de MongoDB en ejecución esperando por conexiones a través del puerto 27017, que es el puerto por defecto del servicio.\\
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.65]{images/mongo-service-started}
+	\caption{Servicio mongod iniciado desde Windows Power Shell.}\label{fig:mongod-service}
+\end{figure}
+
+Ahora se puede ejecutar el cliente de MongoDB desde una línea de comandos para gestionar las colecciones de nuestras bases de datos.
+
+
+
+
+
+\subsection{Mongoose}
+
+\section{AngularJS}
+
+\chapter{Desarrollo de una aplicación MEAN a través de servicios web REST}
+
+\section{Descripción de la aplicación}
+Para ejemplificar el uso del Stack MEAN y las herramientas antes descritas se desarrollará una aplicación web destinada a ser utilizada por bibliotecas. La aplicación permitirá por un lado, a la institución bibliotecaria hacer accesible el catálogo de su acervo a sus usuarios a través un sitio web, además los usuarios que hagan uso del servicio de préstamo de ejemplares a domicilio podrán consultar sus fechas de entrega por el mismo portal. 
+
+\section{Estructura de la aplicación}
+\section{Front-end}
+\section{Esquema de la Base de Datos}
+\section{API}
+\section{Conexión Front-end Back-end}
+
+\chapter{Seguridad}
+\section{Seguridad a través de cuentas de usuario}
+\section{Seguridad a través de Facebook}
+
+\bibliographystyle{acm}
+\bibliography{biblio}
+\end{document}

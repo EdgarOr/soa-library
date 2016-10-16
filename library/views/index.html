@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> </head>
+<style>
+    body {
+        background: #f1f1f1!important;
+    }
+    
+    #main-content {
+        height: calc(100vh - 50px);
+        overflow: scroll;
+    }
+    
+    .navbar {
+        margin-bottom: 0px;
+    }
+    
+    .nopadding {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .fill {
+        height: calc(100vh - 50px);
+    }
+    
+    .overflow {
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+    
+    .btn-toolbar {
+        margin-right: 0px;
+        margin-left: 0px;
+        width: 100%;
+    }
+</style>
+
+<body>
+    <div class="container-fluid">
+        <!-- NAVBAR -->
+        <div class="row">
+            <div class="col-sm-12 nopadding">
+                <div class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="navbar-brand" href="#">LIBRARIAN APP</a> </div>
+                        <div class="collapse navbar-collapse" id="myNavbar">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- SIDEBAR -->
+        <div class="row">
+            <div class="col-lg-2 col-md-2 nopadding">
+                <div class="panel panel-default visible-xs visible-sm">
+                    <ul class="nav nav-pills">
+                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="#">Menu 1</a></li>
+                        <li><a href="#">Menu 2</a></li>
+                        <li><a href="#">Menu 3</a></li>
+                    </ul>
+                </div>
+                <div class="panel panel-default panel-group visible-md visible-lg fill">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse1">Collapsible panel</a>
+        </h4> </div>
+                        <div id="collapse1" class="panel-collapse collapse">
+                            <ul class="list-group">
+                                <li class="list-group-item">One</li>
+                                <li class="list-group-item">Two</li>
+                                <li class="list-group-item">Three</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse2">Collapsible panel</a>
+        </h4> </div>
+                        <div id="collapse2" class="panel-collapse collapse">
+                            <ul class="list-group">
+                                <li class="list-group-item">One</li>
+                                <li class="list-group-item">Two</li>
+                                <li class="list-group-item">Three</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+          <a data-toggle="collapse" href="#collapse3">Collapsible panel</a>
+        </h4> </div>
+                        <div id="collapse3" class="panel-collapse collapse">
+                            <ul class="list-group">
+                                <li class="list-group-item">One</li>
+                                <li class="list-group-item">Two</li>
+                                <li class="list-group-item">Three</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-10 col-md-10 fill overflow"> </div>
+        </div>
+    </div>
+</body>
+
+</html>

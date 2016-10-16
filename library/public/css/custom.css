@@ -1,0 +1,117 @@
+ body {
+     background: #dfdfdf!important;
+ }
+ 
+ .nopadding {
+     padding: 0px !important;
+     margin: 0 !important;
+ }
+ 
+ .fill {
+     height: calc(100vh - 95px);
+     padding: 16px;
+     background: white;
+ }
+ 
+.sidebar {
+     padding: 16px;
+     background: white;
+}
+
+ .overflow {
+     overflow-y: scroll;
+     overflow-x: hidden;
+ }
+ 
+ 
+ .popup-list-item {
+     margin: 0px;
+     border: 0px solid;
+ }
+ 
+ .btn {
+     text-transform: uppercase;
+ }
+ 
+ .navbar-fixed-bottom {
+     margin: 0px;
+ }
+ 
+ .sidebar-item {
+     font-size: 24px;
+     color: #337ab7;
+ }
+ 
+ .cover-image {
+     cursor: pointer;
+ }
+ 
+ .btn-traslucid {
+     background-color: transparent;
+ }
+ 
+ .form-header {
+     font-size: 24px;
+ }
+ 
+ hr {
+     margin-top: 1px;
+ }
+
+
+.loading-ic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 10px solid;
+    border-color: #dedede;
+    border-top-color: #ababab;
+}
+
+.ic-large {
+    width: 100px;
+    height: 100px;
+    border-width: 15px;
+}
+
+/*TAKED FROM http://bootsnipp.com/snippets/featured/glyphicon-animate-rotation-and-flip*/
+.ic-spin {
+  -webkit-animation: spin 2s infinite ease;
+  -moz-animation: spin 2s infinite ease;
+  -o-animation: spin 2s infinite ease;
+  animation: spin 2s infinite ease;
+}
+@-moz-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(359deg);
+  }
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+  }
+}
+@-o-keyframes spin {
+  0% {
+    -o-transform: rotate(0deg);
+  }
+  100% {
+    -o-transform: rotate(359deg);
+  }
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
