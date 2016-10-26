@@ -1,14 +1,19 @@
 <!doctype html>
-<html>
+<html ng-app="users">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/bower_components/bootstrap-select/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="/bower_components/material-design-icons/iconfont/material-icons.css">
     <link href="/public/css/custom.css" rel="stylesheet">
+
     <style>
-        #user-card {
-            display: none;
+        article section.panel-body{
+            height: 170px;
+            max-height: 170px;
+            min-height: 170px;
+            overflow: hidden;
         }
     </style>
 </head>
@@ -120,18 +125,25 @@
             </div>
         </aside>
         <!-- MAIN CONTENT AREA -->
-        <main class="col-xs-12 col-md-10 fill overflow panel panel-default">
+        <main class="col-xs-12 col-md-10 fill overflow panel panel-default" ng-controller="UserController">
             <div class="jumbotron">
                 <h1>Users</h1>
                 <p>Users registered on the system</p></div>
             <div id="content-panel" class="row panel-body">
-                <article id="user-card" class="col-xs-12 col-sm-6">
+                <article class="info-card col-xs-12 col-sm-4" ng-repeat="user in users">
                     <div class="panel panel-default">
                         <header class="panel-heading">
                             <div class="row">
-                                <div class="col-xs-10"><strong>ID: </strong><strong class="user-id"> User Code </strong></div>
+                                <div class="col-xs-10"><strong>ID: {{user._id}} </strong></div>
                                 <div class="col-xs-2">
-                                    <button class="btn btn-traslucid pull-right"> <span class="glyphicon glyphicon-option-vertical options-menu"></span> </button>
+                                    <div class="dropdown">
+                                    <span class="glyphicon glyphicon-option-vertical pull-right options-menu dropdown-toggle" 
+                                    data-toggle="dropdown"></span>
+                                    <ul class="dropdown-menu">
+                                        <li><a href='#' data-toggle='modal' data-target='#edit-modal' ng-click="showEditForm(user);">Edit</a></li>
+                                        <li><a href='#' class='list-group-item popup-list-item' data-toggle='modal' data-target='#delete-modal' ng-click='setupToDelete(user._id);'>Delete</a></li>
+                                    </ul>
+                                    </div>
                                 </div>
                             </div>
                         </header>
@@ -139,86 +151,311 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <h4>Name</h4>
-                                    <p class="user-name">Complete name</p>
+                                    <p>{{user.name}} {{user.lastname}}</p>
                                     <h4>Email</h4>
-                                    <p class="user-email">something@domain.com</p>
+                                    <p>{{user.email}}</p>
                                 </div>
                                 <div class="col-sm-6">
                                     <figure class="center-block">
                                         <figcaption>
-                                            <h4>User photo</h4></figcaption><img class="img-thumbnail user-profile-photo center-block" src="/public/images/profile-photos/default.png" alt="User Profile Photo" width="100" data-toggle="modal" data-target="" /> </figure>
+                                            <h4>User photo</h4></figcaption><img class="img-thumbnail user-profile-photo center-block" src="{{user.profilePhoto}}" alt="User Profile Photo" width="100" data-toggle="modal" data-target="" /> </figure>
                                 </div>
-                            </div>
-                            <br/>
-                            <button class="btn btn-primary btn-block"> MORE INFO </button>
+                            </div>                            
                         </section>
+                        <div class="panel-footer">
+                            <button 
+                                class="btn btn-primary"
+                                data-toggle="modal" 
+                                data-target="#info-modal" 
+                                ng-click="showInfo(user);"> MORE INFO </button>
+                        </div>
                     </div>
                 </article>
-            </div>
+
+                <div class="modal fade" id="create-modal" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <form id="user-form" class="panel panel-default" enctype="multipart/form-data" ng-submit="create()">
+                            
+                            <header class="panel-heading form-header">
+                                <button class="btn btn-traslucid pull-left" type="reset" data-dismiss="modal" ng-click="resetCreateForm();">
+                                <i class="material-icons">arrow_back</i>
+                                </button>
+                                <span>User Registration</span>
+                                <button class="btn btn-traslucid btn-default pull-right" type="submit">
+                                <i class="material-icons">create</i>
+                                </button>
+                            </header>
+                            <div class="panel-body row">
+                                <fieldset class="col-sm-6 col-md-8">
+                                    <legend>Personal Data</legend>
+                                    <div class="form-group">
+                                        <div class="col-xs-12 col-md-6">
+                                            <label for="name">Name:</label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control input-lg" 
+                                                id="name" name="name" 
+                                                ng-model="newUser.name"
+                                                required> </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <label for="lastname">Lastname:</label>
+                                            <input 
+                                                type="lastname" 
+                                                class="form-control input-lg" 
+                                                id="lastname" name="lastname" 
+                                                ng-model="newUser.lastname"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <br/>
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <label for="password">Password:</label>
+                                            <input 
+                                                type="password" 
+                                                class="form-control input-lg" 
+                                                id="password" name="password" 
+                                                ng-model="newUser.password"
+                                                required> </div>
+                                        <div class="col-xs-12">
+                                            <label for="address">Address:</label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control input-lg" 
+                                                id="address" name="address" 
+                                                ng-model="newUser.address"
+                                                required> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-xs-12 col-md-4">
+                                            <label for="phone">Phone:</label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control input-lg" 
+                                                id="phone" name="phone" 
+                                                ng-model="newUser.phone"
+                                                required>
+                                        </div>
+                                        <div class="col-xs-12 col-md-8">
+                                            <label for="email">Email:</label>
+                                            <input 
+                                                type="email" 
+                                                class="form-control input-lg" 
+                                                id="email" name="email" 
+                                                ng-model="newUser.email"
+                                                required>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="col-sm-6 col-md-4">
+                                    <legend>User Photo</legend>
+                                    <div class="form-group">
+                                        <figure> <img id="preview-img" class="img-responsive center-block" src="/public/images/profile-photos/default.png" alt="User profile photo" width="60%" /> </figure>
+                                        <br/>
+                                        <label class="btn btn-default btn-lg btn-block">
+                                            <input id="upload-input" style="display:none;" name="profile-photo" type="file" accept="image/*"  onchange="angular.element(this).scope().showPreviewImg('preview-img', this)"/><span class="glyphicon glyphicon-upload"></span> UPLOAD
+                                        </label>
+                                        
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                </div>
+
+                <div class="modal fade" id="edit-modal" role="dialog">
+                <div class="modal-dialog modal-lg">
+                        <!-- Modal content-->
+                    <div class="modal-content">
+                   
+                        <form id="user-edit-form" class="panel panel-default" ng-submit="updateUser();">
+                            <header class="panel-heading form-header">
+                            <button class="btn btn-traslucid pull-left" type="reset" data-dismiss="modal">
+                            <i class="material-icons">arrow_back</i>
+                            </button>
+                            <span>User Data Update</span>
+                            <button 
+                                class="btn btn-traslucid btn-default pull-right" 
+                                type="submit" >
+                            <i class="material-icons">save</i>
+                            </button>
+                            </header>
+
+                            
+                            <div class="panel-body row">
+                                <fieldset class="col-sm-6 col-md-8">
+                                    <legend>Personal Data</legend>
+                                    <div class="form-group">
+                                    <div class="col-xs-12 col-md-6">
+                                        <label for="name">Name:</label>
+                                        <input 
+                                            type="text"
+                                            class="form-control input-lg"
+                                            id="name"
+                                            name="name"
+                                            ng-model="userToEdit.name"
+                                            required> </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <label for="lastname">Lastname:</label>
+                                        <input 
+                                            type="lastname"
+                                            class="form-control input-lg"
+                                            id="lastname"
+                                            name="lastname"
+                                            ng-model="userToEdit.lastname"
+                                            required> </div>
+                                    </div>
+
+                                    <br/>
+                                    <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <label for="address">Address:</label>
+                                        <input 
+                                            type="text"
+                                            class="form-control input-lg"
+                                            id="address"
+                                            name="address"
+                                            ng-model="userToEdit.address"
+                                            required> </div>
+                                    </div>
+                                    <div class="form-group">
+                                    <div class="col-xs-12 col-md-4">
+                                        <label for="phone">Phone:</label>
+                                        <input 
+                                            type="text" 
+                                            class="form-control input-lg" 
+                                            id="phone" 
+                                            name="phone"
+                                            ng-model="userToEdit.phone"
+                                            required> </div>
+                                    <div class="col-xs-12 col-md-8">
+                                        <label for="email">Email:</label>
+                                        <input 
+                                            type="email" 
+                                            class="form-control input-lg"
+                                            id="email" 
+                                            name="email" 
+                                            ng-model="userToEdit.email"
+                                            required> </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset class="col-sm-6 col-md-4">
+                                    <legend>User Photo</legend>
+                                    <div class="form-group">
+                                        <figure> <img id="prof-photo-edit-prev" class="img-responsive center-block" src="{{userToEdit.profilePhoto}}" alt="User profile photo" width="60%" /> </figure>
+                                        <br/>
+                                       <label class="btn btn-default btn-lg btn-block">
+                                            <input id="profile-photo-input" style="display:none;" name="profile-photo" type="file" accept="image/*"  onchange="angular.element(this).scope().showPreviewImg('prof-photo-edit-prev', this)"/><span class="glyphicon glyphicon-upload"></span> UPLOAD
+                                        </label>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
+                </div>
+
+                <div class="modal fade" id="wait-modal" role="dialog">
+                <div class="modal-dialog modal-sm">
+                        <!-- Modal content-->
+                        <div class="modal-content container-fluid">
+                            <div class="modal-body ">
+                                <div class="modal-body row">
+                                    <div class="col-xs-12 text-center">
+                                        <h3>Wait just a little...</h3></div>
+                                    <div class="col-xs-12">
+                                        <div class="loading-ic ic-spin center-block"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                </div>
+
+                <div class="modal fade" id="response-modal" role="dialog">
+                <div class="modal-dialog modal-sm">
+                        <!-- Modal content-->
+                        <div class="modal-content container-fluid">
+                            <div class="modal-header">
+                                <h3>{{response.title}}</h3> </div>
+                            <div class="modal-body center-block">
+                                <h4>{{response.message}}</h4> </div>
+                            <div class="modal-footer">
+                                 <button class="btn btn-info" data-dismiss="modal">OK</button>
+                            </div>
+                        </div>
+                </div>
+                </div>
+
+                <div class="modal fade" id="delete-modal" role="dialog">
+                <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>Confirm the operation</h3>
+                            </div>
+                            <div class="modal-body center-block">
+                                <h4>Are you sure about delete this user?</h4>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-default" data-dismiss="modal">NO, STOP THIS!</button>
+                                <button class="btn btn-warning" ng-click="deleteUser();" data-dismiss="modal">YES, I'M SURE</button>
+                            </div>
+                        </div>
+                </div>
+                </div>
+
+                <div class="modal fade" id="info-modal" role="dialog">
+                <div class="modal-dialog modal-md">
+                    <div id="bookInfoModal" class="modal-content">
+                        <div class="modal-body center-block">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h3 >User Information</h3> </div>
+                            <div class="modal-body center-block">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6">
+                                            <h4>Name</h4>
+                                            <p ng-bind="userInfo.name"></p>
+                                            <h4>Lastname</h4>
+                                            <p ng-bind="userInfo.lastname"></p>
+                                            <h4>Address</h4>
+                                            <p ng-bind="userInfo.address"></p>     
+                                        </div>
+                                        <div class="col-sm-12 col-md-6">
+                                            <h4>Registered Date</h4>
+                                            <p ng-bind="userInfo.createdAt"></p>
+                                            <h4>Phone</h4>
+                                            <p ng-bind="userInfo.phone"></p>
+                                            <h4>Email</h4>
+                                            <p ng-bind="userInfo.email"></p>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <figure> <img class="img-thumbnail center-block" src="{{userInfo.profilePhoto}}" alt="User profile photo" width="70%" /> </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
         </main>
     </div>
-    <div class="modal fade" id="coverModal" role="dialog">
-        <div class="modal-dialog model-lg">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body center-block">
-                    <figure> <img id="img-modal" class="img-responsive" src="" width="" />
-                        <figcaption>Cover photo of </figcaption>
-                    </figure>
-                </div>
-            </div>
-        </div>
+    <div class="fixed">
+        <button class="floating-btn btn btn-primary" data-toggle="modal" data-target="#create-modal">+</button>
     </div>
     <script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/bower_components/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-    <script>
-        function deleteUser(userId) {
-            $.ajax({
-                url: '/api/v1/users/' + userId
-                , type: 'DELETE'
-                , success: function (books, status, xhttp) {
-                    alert('User Deleted');
-                    location.reload();
-                }
-                , error: function (jqXHR, textStatus, errorThrown) {
-                    showResponseMessage('Sorry!', 'The\'re some troubles with the server, Try again later.', undefined);
-                }
-            });
-        }
-        $.ajax({
-            url: '/api/v1/users'
-            , type: 'GET'
-            , success: function (users, status, xhttp) {
-                var user;
-                var counter = 0;
-                for (user of users) {
-                    counter++;
-                    var article = $('#user-card').clone();
-                    article.css('display', 'block');
-                    article.attr('id', 'user-card-' + counter);
-                    article.find('.user-id').text(user._id);
-                    article.find('.user-name').text(user.name + " " + user.lastname);
-                    article.find('.user-email').text(user.email);
-                    if (user.profilePhoto) {
-                        article.find('img.user-profile-photo').attr('src', user.profilePhoto);
-                    }
-                    article.find('.options-menu').attr('data-content', "<div class='list-group'>" + "<a href='#' class='list-group-item popup-list-item edit-option'>Edit</a>" + "<a href='#' class='list-group-item popup-list-item delete-option'onclick='deleteUser(\"" + user._id + "\")'>Delete</a></div>");
-                    $('#content-panel').append(article);
-                }
-                $('.options-menu').popover({
-                    html: true
-                    , placement: "bottom"
-                });
-            }
-            , error: function (jqXHR, textStatus, errorThrown) {
-                alert('error');
-            }
-        });
-    </script>
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/public/js/user-list.js"></script>
+
 </body>
 
 </html>

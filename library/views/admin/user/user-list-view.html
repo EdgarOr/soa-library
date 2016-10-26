@@ -1,0 +1,61 @@
+<style>
+        article section.panel-body{
+            height: 170px;
+            max-height: 170px;
+            min-height: 170px;
+            overflow: hidden;
+        }
+    </style>
+
+<div class="jumbotron">
+    <h1>Users</h1>
+    <p>Users registered on the system</p>
+</div>
+<div load-users>
+    <article class="info-card col-xs-12 col-sm-4" ng-repeat="user in users">
+        <div class="panel panel-default">
+            <header class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-10"><strong>ID: {{user._id}} </strong></div>
+                    <div class="col-xs-2">
+                        <div class="dropdown">
+                            <span class="glyphicon glyphicon-option-vertical pull-right options-menu dropdown-toggle" 
+                            data-toggle="dropdown"></span>
+                            <ul class="dropdown-menu">
+                                <li><a href='#user/{{user._id}}/edit'>Edit</a></li>
+                                <li><a class='list-group-item popup-list-item' data-toggle="modal" data-target="#delete-modal" ng-click='setupToDelete(user._id);'>Delete</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <section class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>Name</h4>
+                        <p>{{user.name}} {{user.lastname}}</p>
+                        <h4>Email</h4>
+                        <p>{{user.email}}</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <figure class="center-block">
+                            <figcaption>
+                                <h4>User photo</h4></figcaption><img class="img-thumbnail user-profile-photo center-block" src="{{user.profilePhoto}}" alt="User Profile Photo" width="100" data-toggle="modal" data-target="" /> </figure>
+                            </div>
+                        </div>                            
+                    </section>
+                    <div class="panel-footer">
+                        <button 
+                        class="btn btn-primary"
+                        data-toggle="modal" 
+                        data-target="#info-modal" 
+                        ng-click="showInfo(user);"> MORE INFO </button>
+                    </div>
+                </div>
+            </article>
+</div>
+<div class="fixed">
+    <a class="floating-btn btn btn-primary" href="#user/new">+</a>
+</div>
+
+<div ng-include="'/admin/delete-dialog-view'"></div>

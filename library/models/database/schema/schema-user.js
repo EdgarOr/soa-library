@@ -21,13 +21,18 @@ var userSchema = {
         type: String,
         required: true
     },
+    address: {
+        type: String,
+        required: true
+    },
     createdAt: {
         type: Date,
         required: true,
         default: Date.now
     },
     profilePhoto: {
-        type: String
+        type: String,
+        default: '/public/images/profile-photos/default.png'
     },
     updatedAt: {
         type: Date

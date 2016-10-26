@@ -33,12 +33,9 @@ router
     })
     //
     .post('/', uploading.single('cover'), function (req, res) {
-        if (req.file) {
+        if (req.file) 
             req.body.cover_photo = '/' + req.file.path;
-        }
-        else {
-            req.body.cover_photo = '/public/images/covers/generic-book-cover.jpg';
-        }
+    
         CRUD.insert(req.body, (error) => {
             if (error) {
                 console.log(error);
@@ -49,7 +46,11 @@ router
         });
     })
     //
-    .put('/:id', upload.none(), (req, res) => {
+    .put('/:id', uploading.single('cover'), (req, res) => {
+        if (req.file) 
+            req.body.cover_photo = '/' + req.file.path;
+        
+      
         CRUD.update(req.params.id, req.body, (error, doc) => {
             if (error) {
                 console.log(error);

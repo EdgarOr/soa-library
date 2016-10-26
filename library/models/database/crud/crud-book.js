@@ -1,3 +1,5 @@
+"use strict";
+
 const schema = require('../schema/schema-book');
 const CRUDClass = require('./crud-class');
 

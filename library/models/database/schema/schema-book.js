@@ -6,7 +6,7 @@ var bookSchema = {
     author: {type: String, required: true},
     editorial: {type: String},
     description: {type: String},
-    cover_photo: {type: String},
+    cover_photo: {type: String, default: '/public/images/covers/generic-book-cover.jpg'},
     categories: [{type: mongoose.Schema.Types.ObjectId, ref:'Category'}]
 };
 

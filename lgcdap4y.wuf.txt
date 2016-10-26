@@ -1,0 +1,156 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	modified:   library/bower.json
+#	new file:   library/bower_components/angular-route/.bower.json
+#	new file:   library/bower_components/angular-route/LICENSE.md
+#	new file:   library/bower_components/angular-route/README.md
+#	new file:   library/bower_components/angular-route/angular-route.js
+#	new file:   library/bower_components/angular-route/angular-route.min.js
+#	new file:   library/bower_components/angular-route/angular-route.min.js.map
+#	new file:   library/bower_components/angular-route/bower.json
+#	new file:   library/bower_components/angular-route/index.js
+#	new file:   library/bower_components/angular-route/package.json
+#	new file:   library/bower_components/material-design-icons/.babelrc
+#	new file:   library/bower_components/material-design-icons/.bower.json
+#	new file:   library/bower_components/material-design-icons/.gitignore
+#	new file:   library/bower_components/material-design-icons/LICENSE
+#	new file:   library/bower_components/material-design-icons/README.md
+#	new file:   library/bower_components/material-design-icons/bower.json
+#	new file:   library/bower_components/material-design-icons/gulpfile.babel.js
+#	new file:   library/bower_components/material-design-icons/iconfont/MaterialIcons-Regular.eot
+#	new file:   library/bower_components/material-design-icons/iconfont/MaterialIcons-Regular.ijmap
+#	new file:   library/bower_components/material-design-icons/iconfont/MaterialIcons-Regular.svg
+#	new file:   library/bower_components/material-design-icons/iconfont/MaterialIcons-Regular.ttf
+#	new file:   library/bower_components/material-design-icons/iconfont/MaterialIcons-Regular.woff
+#	new file:   library/bower_components/material-design-icons/iconfont/MaterialIcons-Regular.woff2
+#	new file:   library/bower_components/material-design-icons/iconfont/README.md
+#	new file:   library/bower_components/material-design-icons/iconfont/codepoints
+#	new file:   library/bower_components/material-design-icons/iconfont/material-icons.css
+#	new file:   library/bower_components/material-design-icons/index.js
+#	new file:   library/bower_components/material-design-icons/package.json
+#	modified:   library/data/db/collection-0-5893531653458215719.wt
+#	modified:   library/data/db/collection-0-6096555226997666821.wt
+#	modified:   library/data/db/collection-2-5893531653458215719.wt
+#	modified:   library/data/db/collection-2-6096555226997666821.wt
+#	modified:   library/data/db/collection-4-5893531653458215719.wt
+#	new file:   library/data/db/diagnostic.data/metrics.2016-10-17T12-25-33Z-00000
+#	new file:   library/data/db/diagnostic.data/metrics.2016-10-18T05-26-28Z-00000
+#	new file:   library/data/db/diagnostic.data/metrics.2016-10-19T02-24-11Z-00000
+#	new file:   library/data/db/diagnostic.data/metrics.2016-10-19T20-06-34Z-00000
+#	new file:   library/data/db/diagnostic.data/metrics.2016-10-20T00-05-28Z-00000
+#	new file:   library/data/db/diagnostic.data/metrics.2016-10-23T05-03-07Z-00000
+#	new file:   library/data/db/diagnostic.data/metrics.2016-10-23T08-40-09Z-00000
+#	new file:   library/data/db/diagnostic.data/metrics.2016-10-23T15-38-32Z-00000
+#	new file:   library/data/db/diagnostic.data/metrics.2016-10-24T05-39-54Z-00000
+#	new file:   library/data/db/diagnostic.data/metrics.2016-10-24T12-14-35Z-00000
+#	new file:   library/data/db/diagnostic.data/metrics.2016-10-24T15-30-16Z-00000
+#	new file:   library/data/db/diagnostic.data/metrics.2016-10-24T22-13-20Z-00000
+#	new file:   library/data/db/diagnostic.data/metrics.2016-10-25T01-44-44Z-00000
+#	new file:   library/data/db/diagnostic.data/metrics.2016-10-25T13-04-05Z-00000
+#	new file:   library/data/db/diagnostic.data/metrics.2016-10-26T00-43-08Z-00000
+#	new file:   library/data/db/diagnostic.data/metrics.2016-10-26T04-37-38Z-00000
+#	new file:   library/data/db/diagnostic.data/metrics.interim
+#	modified:   library/data/db/index-1-5893531653458215719.wt
+#	modified:   library/data/db/index-1-6096555226997666821.wt
+#	modified:   library/data/db/index-3-5893531653458215719.wt
+#	modified:   library/data/db/index-3-6096555226997666821.wt
+#	modified:   library/data/db/index-5-5893531653458215719.wt
+#	deleted:    library/data/db/journal/WiredTigerLog.0000000034
+#	new file:   library/data/db/journal/WiredTigerLog.0000000052
+#
+# Changes not staged for commit:
+#	modified:   library/data/db/WiredTiger.turtle
+#	modified:   library/data/db/WiredTiger.wt
+#	modified:   library/data/db/diagnostic.data/metrics.interim
+#	modified:   library/data/db/mongod.lock
+#	modified:   library/data/db/sizeStorer.wt
+#	modified:   library/models/database/crud/crud-book.js
+#	modified:   library/models/database/crud/crud-category.js
+#	modified:   library/models/database/crud/crud-class.js
+#	modified:   library/models/database/crud/crud-copy.js
+#	modified:   library/models/database/crud/crud-lending.js
+#	modified:   library/models/database/crud/crud-user.js
+#	modified:   library/models/database/schema/schema-book.js
+#	modified:   library/models/database/schema/schema-user.js
+#	modified:   library/public/css/custom.css
+#	deleted:    library/public/js/book-list.js
+#	modified:   library/routes/api-v1/books.js
+#	modified:   library/routes/api-v1/categories.js
+#	modified:   library/routes/api-v1/users.js
+#	modified:   library/routes/site/admin.js
+#	deleted:    library/views/admin/book-lending.jade
+#	deleted:    library/views/admin/book-list.jade
+#	deleted:    library/views/admin/book-new.jade
+#	deleted:    library/views/admin/category-list.jade
+#	deleted:    library/views/admin/category-new.jade
+#	modified:   library/views/admin/html/book-list.html
+#	deleted:    library/views/admin/html/category-edit.html
+#	modified:   library/views/admin/html/category-list.html
+#	deleted:    library/views/admin/html/category-new.html
+#	modified:   library/views/admin/html/user-list.html
+#	modified:   library/views/admin/html/user-new.html
+#	deleted:    library/views/admin/index.jade
+#	deleted:    library/views/admin/user-list.jade
+#	deleted:    library/views/admin/user-new.jade
+#
+# Untracked files:
+#	library/npm-debug.log
+#	library/public/images/covers/0d48016b3ecfab30e06d18e4cf22ed5d
+#	library/public/images/covers/1798b7f684dceb782fce5fa45f1cefd6
+#	library/public/images/covers/39025ef212b597b57756e0343ce35fc2
+#	library/public/images/covers/3c9a945d97a6d57080b75c83c885f3f6
+#	library/public/images/covers/623e4c7f7ae65a205764061eb2ac2ea9
+#	library/public/images/covers/63e0d66a9a2eb02a05a34711793229ed
+#	library/public/images/covers/6408b3cb041c481d517d4de999fa3fc8
+#	library/public/images/covers/6abe22ed72b79e491fa7a89d13c20296
+#	library/public/images/covers/88e0c82e3520105ae32384d08e7a17cf
+#	library/public/images/covers/8f77d5dee1aa09f2a09ff13c268cd030
+#	library/public/images/covers/a656f268f8e6490c68d926a1e2f1deac
+#	library/public/images/covers/bb4de1358fc962329b486dd31e61ccb7
+#	library/public/images/covers/bc77e61cc59158f70bd68f00e50f8dbd
+#	library/public/images/covers/c1e8d05ecb044b673f78ab43332a6002
+#	library/public/images/covers/c9009b47a0676b2c7457acb64abc6a36
+#	library/public/images/covers/d03083b2728ed3ba79eb7e4e678b383b
+#	library/public/images/covers/d687b22c6502da98f09b21f59d1b4374
+#	library/public/images/covers/f93e8d851a7859d2807f77641e1be3ba
+#	library/public/images/profile-photos/0d33e434e4408b58ab03b70d941be83f
+#	library/public/images/profile-photos/241d478aa63d924ae8d65d4488a2fbd5
+#	library/public/images/profile-photos/27d549af01f597d614c6eec5f0c058ba
+#	library/public/images/profile-photos/295a19297ee860b24361d14540f0f93a
+#	library/public/images/profile-photos/30df9f056d532f152b83131c4e61236a
+#	library/public/images/profile-photos/40c5a11bf7ed9007affd5f7fd0367666
+#	library/public/images/profile-photos/429ae8a2d5d93304c8cb70f5921e8235
+#	library/public/images/profile-photos/4febae958193e582cea3fae3ae7c2a58
+#	library/public/images/profile-photos/6b8c05471aec84300513dfaef75b1aa2
+#	library/public/images/profile-photos/72034c96546aadb5cdcae3c0a2f07e1b
+#	library/public/images/profile-photos/931c2f716b6c971314109a4f2737561c
+#	library/public/images/profile-photos/a363feb468230b19284058fd06ec18b9
+#	library/public/images/profile-photos/b4517479413373697410acfaa2062de5
+#	library/public/images/profile-photos/be55ccda259f62d65ebd54b81fc8c5c7
+#	library/public/images/profile-photos/bfff5a0da7021a91ed4df4f0d0825338
+#	library/public/images/profile-photos/c765241ce55a8f1d851982d31df3a63f
+#	library/public/images/profile-photos/d3c29ee2cdf4aa3cd2fc2ee036fc3fe6
+#	library/public/images/profile-photos/df568740f22f284737ec3db1e9bcc6f0
+#	library/public/images/profile-photos/f0d11a89bcf44c5e391de2b5220b0a8a
+#	library/public/images/profile-photos/f1e53064dd8950209764f02d00d396d6
+#	library/public/js/app.js
+#	library/public/js/book-controller.js
+#	library/public/js/category-controller.js
+#	library/public/js/category-service.js
+#	library/public/js/user-controller.js
+#	library/public/js/web-service.js
+#	library/views/admin/app.html
+#	library/views/admin/book/
+#	library/views/admin/category/
+#	library/views/admin/delete-dialog-view.html
+#	library/views/admin/html/Test.html
+#	library/views/admin/html/sidebar.html
+#	library/views/admin/response-dialog-view.html
+#	library/views/admin/user/
+#
+

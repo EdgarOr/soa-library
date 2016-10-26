@@ -1,0 +1,74 @@
+<style>
+	.label {
+		font-size: 18px;
+	}
+
+	p {
+		font-size: 18px;
+	}
+
+	h3 {
+		font-weight: bold;
+	}
+
+</style>
+<div class="panel panel-default" lib-book-info>
+	<div class="panel-heading">
+	<h1>Book Information</h1>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div id="book-info" class="col-sm-6 ">
+			<div class="container">
+				<h3>ISBN</h3>
+				<p ng-bind="bookInfo.isbn"></p>
+				<h3>Title</h3>
+				<p ng-bind="bookInfo.title"></p>
+				<h3>Author</h3>
+				<p ng-bind="bookInfo.author"></p>
+				<h3>Categories</h3>
+				<div>
+					<span ng-repeat="cat in bookInfo.categories"> <span  class="label label-primary"  ng-bind="cat.name"></span></span>
+				</div> 
+			</div>
+			</div>
+			<div class="col-xs-6">
+				<figure> <img class="img-thumbnail center-block" src="{{bookInfo.cover_photo}}" alt="Book´s cover" width="60%" height="600px"/> </figure>
+			</div>
+			
+		</div>
+		<div class="row">
+		<div class="container">
+		<h3>Abstract</h3>
+				<p class="text-justify" ng-bind="bookInfo.description"></p></div>
+				</div>
+	</div>
+	<hr>
+	<div class="panel-body">
+		<div class="row">
+			<div class="container">
+				<h2>Book copies</h2>
+				<table id="copies-table" class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th>Status</th>
+							<th>Pages</th>
+							<th>Edition</th>
+							<th>Language</th>
+							<th>Pub. Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="copy in bookInfo.copies"> 
+							<td ng-bind="copy.state"></td>
+							<td ng-bind="copy.pages"></td>
+							<td ng-bind="copy.edition"></td>
+							<td ng-bind="copy.language"></td>
+							<td ng-bind="copy.publication_date"></td>
+						</tr> 
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

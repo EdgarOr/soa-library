@@ -1,16 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="librarian">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/bower_components/bootstrap-select/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="/bower_components/material-design-icons/iconfont/material-icons.css">
     <link href="/public/css/custom.css" rel="stylesheet">
-    <style>
-        #category-card {
-            display: none;
-        }
-    </style>
+
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/bower_components/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <script src="/bower_components/angular/angular.min.js"></script>
+    
+    <script src="/public/js/config.js"></script>
+    <script src="/public/js/category-service.js"></script>
+    <script src="/public/js/category-list.js"></script>
+
 </head>
 
 <body>
@@ -120,110 +126,175 @@
             </div>
         </aside>
         <!-- MAIN CONTENT AREA -->
-        <main id="content-panel" class="col-xs-12 col-md-10 fill overflow panel panel-default container-fluid center-block">
-            <div class="jumbotron"><h1>Category List</h1>
-                <p>All the categories availables for the books</p></div>
-               <article id="category-card">
-                <div class="panel panel-default">
-                    <header class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-7"><strong class="category-name"> Category Name </strong></div>
-                            <div class="col-xs-5">
-                                <div class="pull-right">
-                                    <button class="btn btn-traslucid edit-btn"><span class="glyphicon glyphicon-edit"></span> </button>
-                                    <button class="btn btn-traslucid delete-btn"> <span class="glyphicon glyphicon-trash"></span> </button>
+        <main 
+            id="content-panel" 
+            class="col-xs-12 col-md-10 fill overflow panel panel-default container-fluid center-block"
+            ng-controller="CategoryController">
+            <div class="jumbotron">
+                <h1>Category List</h1>
+                <p>All the categories availables for the books</p>
+            </div>
+            <div load-categories>
+            <article class="info-card" ng-repeat="cat in categories">
+                    <div class="panel panel-default">
+                        <header class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-7"><strong class="category-name">{{cat.name}}</strong></div>
+                                <div class="col-xs-5">
+                                    <div class="pull-right">
+                                        <button 
+                                            class="btn btn-traslucid edit-btn" 
+                                            data-toggle="modal" 
+                                            data-target="#edit-modal"
+                                            ng-click="showEditForm(cat);" >
+                                            <span class="glyphicon glyphicon-edit"></span> 
+                                        </button>
+                                        <button 
+                                            class="btn btn-traslucid delete-btn"
+                                            data-toggle="modal" 
+                                            data-target="#delete-modal"
+                                            ng-click="setupToDelete(cat._id);">
+                                            <span class="glyphicon glyphicon-trash"></span> 
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </header>
-                    <section class="panel-body">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <h4>Description</h4>
-                                <p class="text-justify category-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed gravida blandit tellus, sed fermentum erat consectetur ut. Nulla facilisi. Nullam molestie nulla lacinia metus commodo ...</p>
+                        </header>
+                        <section class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <h4>Description</h4>
+                                    <p class="text-justify">{{cat.description}}</p>
+                                </div>
                             </div>
-                        </div>
-                    </section>
-                </div>
+                        </section>
+                    </div>
             </article>
-        </main>
-    </div>
-    <div class="modal fade" id="coverModal" role="dialog">
-        <div class="modal-dialog model-lg">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body center-block">
-                    <figure> <img id="img-modal" class="img-responsive" src="" width="" />
-                        <figcaption>Cover photo of </figcaption>
-                    </figure>
+            </div>
+
+
+<!-- 
+***************************************************************************************************************************************
+********                                                                                                                      *********
+********                                             MODALS SECTION                                                           *********
+********                                                                                                                      *********
+***************************************************************************************************************************************
+-->
+           <div class="modal fade" id="edit-modal" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <!-- <div class="modal-body"> -->
+                    <form class="panel panel-default" ng-submit="updateCategory();">
+                        <header class="panel-heading form-header">
+                            <button class="btn btn-traslucid pull-left" type="reset" data-dismiss="modal">
+                            <i class="material-icons">arrow_back</i>
+                            </button>
+                            <span>Edit Category Information</span>
+                            <button 
+                                class="btn btn-traslucid btn-default pull-right" 
+                                type="submit" >
+                            <i class="material-icons">save</i>
+                            </button>
+                        </header>
+                        <fieldset class="panel-body">
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <input type="text" class="form-control input-lg" id="name" name="name" ng-model="catToEdit.name"> </div>
+                            <div class="form-group form-group-lg">
+                                <label for="description">Description:</label>
+                                <textarea class="form-control" id="description" name="description" rows="5" ng-model="catToEdit.description"></textarea>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <!-- </div> -->
                 </div>
             </div>
-        </div>
+            </div>
+
+            <div class="modal fade" id="create-modal" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <form id="new-category-form" class="panel panel-default" ng-submit="create()">
+                        <header class="panel-heading form-header">
+                            <button class="btn btn-traslucid pull-left" type="reset" data-dismiss="modal" ng-click="resetCreateForm();">
+                            <i class="material-icons">arrow_back</i>
+                            </button>
+                            <span>New Category</span>
+                            <button class="btn btn-traslucid btn-default pull-right" type="submit" >
+                            <i class="material-icons">create</i>
+                            </button>
+                        </header>
+                        <fieldset class="panel-body container-fluid">
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <input type="text" class="form-control input-lg" id="name" name="name" ng-model="newCategory.name" required> </div>
+                            <div class="form-group form-group-lg">
+                                <label for="description">Description:</label>
+                                <textarea class="form-control" id="description" name="description" rows="5" ng-model="newCategory.description"></textarea>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            </div>
+
+            <div class="modal fade" id="wait-modal" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <!-- Modal content-->
+                <div class="modal-content container-fluid">
+                    <div class="modal-body ">
+                        <div class="modal-body row">
+                            <div class="col-xs-12 text-center">
+                                <h3>Wait just a little...</h3></div>
+                            <div class="col-xs-12">
+                                <div class="loading-ic ic-spin center-block"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <div class="modal fade" id="response-modal" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <!-- Modal content-->
+                <div class="modal-content container-fluid">
+                    <div class="modal-header">
+                        <h3>{{response.title}}</h3> </div>
+                    <div class="modal-body center-block">
+                        <h4>{{response.message}}</h4> </div>
+                    <div class="modal-footer">
+                         <button class="btn btn-info" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <div class="modal fade" id="delete-modal" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>Confirm the operation</h3>
+                    </div>
+                    <div class="modal-body center-block">
+                        <h4>Are you sure about delete this category?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal">NO, STOP THIS!</button>
+                        <button class="btn btn-warning" ng-click="deleteCategory();" data-dismiss="modal">YES, I'M SURE</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        
+        </main>
     </div>
-    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/bower_components/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-    <script>
-        $(() => {
-            $.ajax({
-                url: '/api/v1/categories'
-                , type: 'GET'
-                , success: function (cats, status, xhttp) {
-                    var cat;
-                    var counter = 0;
-                    for (cat of cats) {
-                        counter++;
-                        var article = $('#category-card').clone();
-                        article.css('display', 'block');
-                        article.attr('id', 'category-card-' + counter);
-                        article.find('.category-name').text(cat.name);
-                        article.find('.category-description').text(cat.description);
-                        article.find('.edit-btn').click(cat,
-                            (e) => {
-                                console.log('Editing the category info');
-                            });
-                        article.find('.delete-btn').click(cat,
-                             (e) => {
-                                console.log('Deleting a category.');
-                                $.ajax({
-                                    url: '/api/v1/categories/' + e.data._id
-                                    , type: 'DELETE'
-                                    , success: function (books, status, xhttp) {
-                                        alert('Category deleted');
-                                       location.reload();
-                                    }
-                                    , error: function (jqXHR, textStatus, errorThrown) {
-                                        alert('Problems deleting the category');
-                                    }
-                                });
-                            });
-                        /*
-                        /*
-                        article.find('.options-menu').attr('data-content', "<div class='list-group'>" + "<a href='#' class='list-group-item popup-list-item' data-toggle='modal' data-target='#modal' onclick='setBookDataToModal(\"" + book.title + "\",\"" + book._id + "\");'>Add a copy</a>" + "<a href='#' class='list-group-item popup-list-item'>Edit</a>" + "<a href='#' class='list-group-item popup-list-item' data-toggle='modal' data-target='#modal' onclick='setupToDelete(\"" + book._id + "\")'>Delete</a></div>");*/
-                        $('.options-menu').popover({
-                            html: true
-                            , placement: "bottom"
-                        });
-                        $('#content-panel').append(article);
-                    }
-                    $('.options-menu').popover({
-                        placement: 'bottom'
-                        , html: 'true'
-                    });
-                }
-                , error: function (jqXHR, textStatus, errorThrown) {
-                    alert('error');
-                }
-            });
-            $('.options-menu').popover({
-                html: true
-                , placement: "bottom"
-            });
-        });
-    </script>
+    <div class="fixed">
+        <button class="floating-btn btn btn-primary" data-toggle="modal" data-target="#create-modal">+</button>
+    </div>
+   
+
 </body>
 
 </html>

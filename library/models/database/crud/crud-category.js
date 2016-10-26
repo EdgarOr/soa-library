@@ -1,3 +1,5 @@
+
+
 const schema = require('../schema/schema-category');
 const CRUD = require('./crud-class');
 class CategoryCRUD extends CRUD {

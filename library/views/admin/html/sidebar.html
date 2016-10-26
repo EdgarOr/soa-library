@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+	<style>
+		body{
+			margin: 0px;
+		}
+		.sidebar{
+			position: relative;
+			margin-top: 40px;
+			width: 50px;
+			float: left;
+			background: #EEEEEE;
+			height: 100vh;
+			-webkit-transition: width 0.5s; /* Safari */
+   			 transition: width 0.5s;
+		}
+
+		.sidebar > a {
+			text-decoration: none;
+		}
+
+
+		.sidebar-item {
+			padding: 8px;
+			font-size: 34px;
+			cursor: pointer;
+			color: black !important;
+			-webkit-transition: font-size 0.5s; /* Safari */
+    		transition: font-size 0.5s;
+		}
+
+		.sidebar-item:hover {
+			background: #DDDDDD;
+		}
+
+		@media only screen and (min-width: 400px) {
+			.sidebar-item {
+				padding: 16px;
+				font-size: 48px;
+			}
+
+			.sidebar {
+				width: 80px;
+			}
+		}
+
+		main {
+			height: 100vh;
+			width: 100vw;
+			background: blue;
+		}
+
+		.top {
+			height: 60px;
+			width: 100vw;
+			background: red;
+		}
+
+	</style>
+</head>
+<body>
+
+<div class="sidebar">
+	<a href=""><i class="material-icons sidebar-item">library_books</i></a>
+	<a href=""><i class="material-icons sidebar-item">label</i></a>
+	<a href=""><i class="material-icons sidebar-item">account_box</i></a>
+	<a href=""><i class="material-icons sidebar-item">access_time</i></a>
+</div>
+
+<div class="top"></div>
+
+<main>
+	<h1>Title</h1>
+</main>
+
+</body>
+</html>

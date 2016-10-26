@@ -8,9 +8,8 @@
  }
  
  .fill {
-     height: calc(100vh - 95px);
+     height: calc(100vh - 65px);
      padding: 16px;
-     background: white;
  }
  
 .sidebar {
@@ -49,13 +48,35 @@
  .btn-traslucid {
      background-color: transparent;
  }
- 
+
  .form-header {
-     font-size: 24px;
+     font-size: 32px !important;
+     /*padding: 12px;*/
+ }
+
+ .form-header > i{
+  cursor: pointer;
+ }
+
+.form-header > button{
+  padding: 0px;
+ }
+
+
+ .form-header > span {
+     padding-left: 24px;
+ }
+
+ .panel {
+  margin-bottom: 0px;
  }
  
  hr {
      margin-top: 1px;
+ }
+
+ .info-card {
+    margin-bottom: 16px;
  }
 
 
@@ -114,4 +135,55 @@
     -webkit-transform: rotate(359deg);
     transform: rotate(359deg);
   }
+}
+
+
+.fixed{
+    position: fixed; 
+        bottom: 30px; 
+        right: 60px;
+}
+.floating-btn{
+  border: none;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  outline: none;
+  font-size: 30px;
+  box-shadow: 0px 6px 5px #999999;
+  -webkit-transition: width 0.5s; /* Safari */
+  transition: width 0.5s;
+  -webkit-transition: height 0.5s; /* Safari */
+  transition: height 0.5s;
+}
+
+.floating-btn:hover {
+  box-shadow: 0px 7px 6px #999999;
+  outline: none !important;
+}
+
+.floating-btn:focus, .floating-btn:active {
+   box-shadow: 0px 7px 6px #999999;
+  outline: none !important;
+}
+
+@media only screen and (min-width: 600px) {
+    .floating-btn{
+        width: 60px;
+        height: 60px;
+        font-size: 35px;
+     }
+}
+
+@media only screen and (min-width: 768px) {
+    .floating-btn{
+        width: 70px;
+        height: 70px;
+        font-size: 40px;
+     }
+     
+}
+
+.material-icons {
+  padding: 4px;
 }

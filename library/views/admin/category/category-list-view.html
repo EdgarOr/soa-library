@@ -1,0 +1,45 @@
+<div class="jumbotron">
+    <h1>Category List</h1>
+    <p>All the categories availables for the books</p>
+</div>
+<div lib-load-categories>
+<article class="info-card" ng-repeat="cat in categories">
+    <div class="panel panel-default">
+        <header class="panel-heading">
+            <div class="row">
+                <div class="col-xs-7"><strong class="category-name">{{cat.name}}</strong></div>
+                <div class="col-xs-5">
+                    <div class="pull-right">
+                        <a 
+                        class="btn btn-traslucid btn-default edit-btn"
+                        href="#category/{{cat._id}}/edit" 
+                        ng-click="setupToUpdate(cat);">
+                        <span class="glyphicon glyphicon-edit"></span> 
+                    </a>
+                <a 
+                    class="btn btn-traslucid btn-default delete-btn"
+                    data-toggle="modal" 
+                    data-target="#delete-modal"
+                    ng-click="setupToDelete(cat._id);">
+                    <span class="glyphicon glyphicon-trash"></span> 
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+<section class="panel-body">
+    <div class="row">
+        <div class="col-xs-12">
+            <h4>Description</h4>
+            <p class="text-justify">{{cat.description}}</p>
+        </div>
+    </div>
+</section>
+</div>
+</article>
+</div>
+<div class="fixed">
+    <a class="floating-btn btn btn-primary" href="#category/new">+</a>
+</div>
+
+<div ng-include="'/admin/delete-dialog-view'"></div>

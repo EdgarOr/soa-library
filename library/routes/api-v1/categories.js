@@ -10,6 +10,17 @@ router
             res.status(200).json(docs);
         });
     })
+
+    .get('/:id', function (req, res, next) {
+
+        CategoryCRUD.findById(req.params.id, function (error, docs) {
+            if (error) {
+                console.log(error);
+                return;
+            }
+            res.status(200).json(docs[0]);
+        });
+    })
     //
     .post('/', upload.none(), (req, res) => {
         CategoryCRUD.insert(req.body, (error) => {

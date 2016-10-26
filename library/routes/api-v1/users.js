@@ -29,12 +29,9 @@ router
     })
     //
     .post('/', uploadProfilePhoto.single('profile-photo'), function (req, res) {
-        if (req.file) {
+        if (req.file) 
             req.body.profilePhoto = '/' + req.file.path;
-        }
-        else {
-            req.body.profilePhoto = '/public/images/profile-photos/default.png';
-        }
+        
         console.log(req.body);
         UserCRUD.insert(req.body, (error) => {
             if (error) {
@@ -46,8 +43,11 @@ router
         });
     })
     //
-    .put('/:id', upload.none(), (req, res) => {
+    .put('/:id', uploadProfilePhoto.single('profile-photo'), (req, res) => {
         console.log("Id of the object to update: " + req.params.id);
+        if (req.file) 
+            req.body.profilePhoto = '/' + req.file.path;
+
         UserCRUD.update(req.params.id, req.body, (error, doc) => {
             if (error) {
                 console.log(error);

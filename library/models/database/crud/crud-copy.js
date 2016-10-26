@@ -1,3 +1,5 @@
+"use strict";
+
 const schema = require('../schema/schema-copy');
 const CRUD = require('./crud-class');
 class CopyCRUD extends CRUD {

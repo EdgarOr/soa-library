@@ -1,0 +1,24 @@
+<form id="new-category-form" class="panel panel-default" ng-submit="create()">
+    <header class="panel-heading form-header">
+        <a class="btn btn-default btn-traslucid pull-left" href="#category/list">
+            <i class="material-icons">arrow_back</i>
+        </a>
+        <span>New Category</span>
+        <button class="btn  btn-traslucid btn-default pull-right" type="submit" >
+            <i class="material-icons">create</i>
+        </button>
+    </header>
+    <fieldset class="panel-body container-fluid">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control input-lg" id="name" name="name" ng-model="newCategory.name" required> 
+        </div>
+        <div class="form-group form-group-lg">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" name="description" rows="5" ng-model="newCategory.description"></textarea>
+        </div>
+    </fieldset>
+</form>
+
+
+<div ng-include="'/admin/response-dialog-view'"></div>

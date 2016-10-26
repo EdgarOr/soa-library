@@ -1,3 +1,5 @@
+"use strict";
+
 const schema = require('../schema/schema-lending');
 const CRUD = require('./crud-class');
 
