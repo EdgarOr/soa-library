@@ -1,6 +1,6 @@
 angular.module(
 	'librarian', 
-	['ngRoute', 'librarian.web-service', 'librarian.controller.category', 'librarian.controller.user', 'librarian.controller.book']
+	['ngRoute', 'librarian.web-service', 'librarian.controller']
 	).
 
 	constant('librarianConsts', {
@@ -49,6 +49,14 @@ angular.module(
 			templateUrl : "user-update",
 			controller: "UserController"
 		})
+		.when("/user/:userId/info", {
+			templateUrl : "user-info",
+			controller: "UserController"
+		})
+		.when("/user/:userId/lend", {
+			templateUrl : "book-lend",
+			controller: "UserController"
+		})
 
 
 		.when("/book/list", {
@@ -63,9 +71,19 @@ angular.module(
 			templateUrl : "book-create",
 			controller: "BookController"
 		})
-		.when("/book/edit", {
+		.when("/book/:bookId/copy", {
+			templateUrl : "book-copy",
+			controller: "BookController"
+		})
+		.when("/book/:bookId/edit", {
 			templateUrl : "book-update",
 			controller: "BookController"
+		})
+
+
+		.when("/lendings/list", {
+			templateUrl : "lendings-list"
+			//,controller: "LendingsController"
 		});
 	}).
 

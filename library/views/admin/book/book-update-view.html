@@ -1,4 +1,4 @@
-<form id="book-form" class="panel panel-default" enctype="multipart/form-data"  ng-submit="updateBook();">
+<form id="edit-book-form" class="panel panel-default" enctype="multipart/form-data"  ng-submit="update();">
     <input hidden="true" ng-model="bookToUpdate._id"/>
     <header class="panel-heading form-header">
         <a class="btn btn-default btn-traslucid pull-left" href="#book/list">
@@ -21,7 +21,7 @@
                         id="isbn" 
                         name="isbn" 
                         required 
-                        ng-model="bookToEdit.isbn">
+                        ng-model="dataToUpdate.isbn">
                     </div>
                     <div class="col-xs-12 col-md-8">
                         <label for="title">Title:</label>
@@ -31,7 +31,7 @@
                         id="title" 
                         name="title" 
                         required
-                        ng-model="bookToEdit.title"> 
+                        ng-model="dataToUpdate.title"> 
                     </div>
                     <div class="col-xs-12">
                         <label for="author">Author:</label>
@@ -41,7 +41,7 @@
                         id="author" 
                         name="author" 
                         required
-                        ng-model="bookToEdit.author"> 
+                        ng-model="dataToUpdate.author"> 
                     </div>
                     <div class="col-xs-12">
                         <label for="category">Category:</label>
@@ -51,20 +51,20 @@
                         name="categories" 
                         data-live-search="true" 
                         title="Choose the book categories"
-                        ng-options="option.name for option in bookToEdit.categoriesAvailable track by option._id"
-                        ng-model="bookToEdit.categories"
+                        ng-options="option.name for option in categories track by option._id"
+                        ng-model="dataToUpdate.categories"
                         required multiple> </select>
                     </div>
                     <div class="col-xs-12">
                         <label for="description">Description:</label>
-                        <textarea class="form-control" id="description" name="description" rows="8" ng-model="bookToEdit.description"></textarea>
+                        <textarea class="form-control" id="description" name="description" rows="8" ng-model="dataToUpdate.description"></textarea>
                     </div>
                 </div>
             </fieldset>
             <fieldset class="col-sm-6 col-md-4">
                 <legend>Cover Photo</legend>
                 <div class="form-group">
-                    <figure> <img id="preview-img" class="img-responsive center-block" src="{{bookToEdit.cover_photo}}" alt="Book´s cover" width="60%" /> </figure>
+                    <figure> <img id="preview-img" class="img-responsive center-block" src="{{dataToUpdate.cover_photo}}" alt="Book´s cover" width="60%" /> </figure>
                     <br/>
                     <label class="btn btn-default btn-lg btn-block ">
                         <input 
@@ -73,8 +73,7 @@
                         style="display:none;" 
                         type="file" 
                         accept="image/*"
-                        ng-model="bookToEdit.cover"
-                        onchange="angular.element(this).scope().showPreviewCover('preview-img', this)"
+                        onchange="angular.element(this).scope().showPreviewImg('preview-img', this)"
                         > <span class="glyphicon glyphicon-upload"></span> UPLOAD</label>
                     </div>
                 </fieldset>

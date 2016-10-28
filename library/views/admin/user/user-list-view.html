@@ -12,7 +12,7 @@
     <p>Users registered on the system</p>
 </div>
 <div load-users>
-    <article class="info-card col-xs-12 col-sm-4" ng-repeat="user in users">
+    <article class="info-card col-xs-12 col-sm-6 col-lg-4" ng-repeat="user in dataList">
         <div class="panel panel-default">
             <header class="panel-heading">
                 <div class="row">
@@ -22,7 +22,8 @@
                             <span class="glyphicon glyphicon-option-vertical pull-right options-menu dropdown-toggle" 
                             data-toggle="dropdown"></span>
                             <ul class="dropdown-menu">
-                                <li><a href='#user/{{user._id}}/edit'>Edit</a></li>
+                                <li><a ng-href='#user/{{user._id}}/lend' ng-click="setupToLend(user);">Lend a Book</a></li>
+                                <li><a ng-href='#user/{{user._id}}/edit' ng-click="setupToUpdate(user);">Edit</a></li>
                                 <li><a class='list-group-item popup-list-item' data-toggle="modal" data-target="#delete-modal" ng-click='setupToDelete(user._id);'>Delete</a></li>
                             </ul>
                         </div>
@@ -45,17 +46,19 @@
                         </div>                            
                     </section>
                     <div class="panel-footer">
-                        <button 
+                        <a 
+                        ng-href="#user/{{user._id}}/info"
                         class="btn btn-primary"
                         data-toggle="modal" 
                         data-target="#info-modal" 
-                        ng-click="showInfo(user);"> MORE INFO </button>
+                        ng-click="showInfo(user);"> MORE INFO 
+                        </a>
                     </div>
                 </div>
             </article>
 </div>
 <div class="fixed">
-    <a class="floating-btn btn btn-primary" href="#user/new">+</a>
+    <a class="floating-btn btn btn-primary" href="#user/new"><i class="material-icons">add</i></a>
 </div>
 
 <div ng-include="'/admin/delete-dialog-view'"></div>

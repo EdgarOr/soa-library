@@ -11,7 +11,6 @@
     </style>
 
 <div class="jumbotron"><h1>Book Catalog</h1></div>
-<div load-books>
 <div class="row">
     <div class="col-sm-4">
         <form class="well">
@@ -22,7 +21,7 @@
         <h2> Filtering by category: <span ng-bind="category || 'None'"></span></h2>
     </div>
 </div>
-    <article ng-repeat="book in books | filter : category" class="info-card col-xs-12 col-sm-4 col-md-4 ">
+    <article ng-repeat="book in dataList | filter : category" class="info-card col-xs-12 col-sm-4 col-md-4 ">
     <div class="panel panel-default">
 
         <header class="panel-heading">
@@ -33,8 +32,8 @@
                         <span class="glyphicon glyphicon-option-vertical pull-right options-menu dropdown-toggle" 
                         data-toggle="dropdown"></span>
                         <ul class="dropdown-menu">
-                            <li><a href='#' data-toggle='modal' data-target='#modal' ng-click='setBookDataToModal(book.title, book._id);'>Add a copy</a></li>
-                            <li><a href='#book/edit' data-toggle='modal' data-target='#modal' ng-click="showEditModal(book);">Edit</a></li>
+                            <li><a ng-href='#book/{{book._id}}/copy' ng-click='setBookToCopy(book);'>Add a copy</a></li>
+                            <li><a ng-href='#book/{{book._id}}/edit' ng-click="setupToUpdate(book);">Edit</a></li>
                             <li><a class='list-group-item popup-list-item' data-toggle='modal' data-target='#delete-modal' ng-click='setupToDelete(book._id);'>Delete</a></li>
                         </ul>
                     </div>
@@ -67,18 +66,16 @@
 
             <div class="panel-footer">
                 <a 
-                href="#book/{{book._id}}/info" 
+                ng-href="#book/{{book._id}}/info" 
+                ng-click="showInfo(book);"
                 class="btn btn-primary" > MORE INFO
                  </a>
             </div>
 
         </div>
     </article>
-
-
-</div>
 <div class="fixed">
-    <a class="floating-btn btn btn-primary" href="#book/new">+</a>
+    <a class="floating-btn btn btn-primary" href="#book/new"><i class="material-icons">add</i></a>
 </div>
 
 <div ng-include="'/admin/delete-dialog-view'"></div>

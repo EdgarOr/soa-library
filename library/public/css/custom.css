@@ -54,15 +54,6 @@
      /*padding: 12px;*/
  }
 
- .form-header > i{
-  cursor: pointer;
- }
-
-.form-header > button{
-  padding: 0px;
- }
-
-
  .form-header > span {
      padding-left: 24px;
  }
@@ -185,5 +176,22 @@
 }
 
 .material-icons {
+  padding: 4px;
+}
+
+.card-icon {
+  color: #444444 !important;
+  text-decoration: none !important;
+  padding: 5px;
+}
+
+.card-icon:active {
+  background: #EEEEEE;
+}
+
+
+.card-icon:hover {
+  text-decoration: none;
+  border: 1px solid lightgrey;
   padding: 4px;
 }

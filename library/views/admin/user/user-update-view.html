@@ -24,7 +24,7 @@
                 class="form-control input-lg"
                 id="name"
                 name="name"
-                ng-model="userToEdit.name"
+                ng-model="dataToUpdate.name"
                 required> </div>
                 <div class="col-xs-12 col-md-6">
                     <label for="lastname">Lastname:</label>
@@ -33,7 +33,7 @@
                     class="form-control input-lg"
                     id="lastname"
                     name="lastname"
-                    ng-model="userToEdit.lastname"
+                    ng-model="dataToUpdate.lastname"
                     required> </div>
                 </div>
 
@@ -46,7 +46,7 @@
                         class="form-control input-lg"
                         id="address"
                         name="address"
-                        ng-model="userToEdit.address"
+                        ng-model="dataToUpdate.address"
                         required> </div>
                     </div>
                     <div class="form-group">
@@ -57,7 +57,7 @@
                             class="form-control input-lg" 
                             id="phone" 
                             name="phone"
-                            ng-model="userToEdit.phone"
+                            ng-model="dataToUpdate.phone"
                             required> </div>
                             <div class="col-xs-12 col-md-8">
                                 <label for="email">Email:</label>
@@ -66,14 +66,14 @@
                                 class="form-control input-lg"
                                 id="email" 
                                 name="email" 
-                                ng-model="userToEdit.email"
+                                ng-model="dataToUpdate.email"
                                 required> </div>
                             </div>
                         </fieldset>
                         <fieldset class="col-sm-6 col-md-4">
                             <legend>User Photo</legend>
                             <div class="form-group">
-                                <figure> <img id="prof-photo-edit-prev" class="img-responsive center-block" src="{{userToEdit.profilePhoto}}" alt="User profile photo" width="60%" /> </figure>
+                                <figure> <img id="prof-photo-edit-prev" class="img-responsive center-block" src="{{dataToUpdate.profilePhoto}}" alt="User profile photo" width="60%" /> </figure>
                                 <br/>
                                 <label class="btn btn-default btn-lg btn-block">
                                     <input id="profile-photo-input" style="display:none;" name="profile-photo" type="file" accept="image/*"  onchange="angular.element(this).scope().showPreviewImg('prof-photo-edit-prev', this)"/><span class="glyphicon glyphicon-upload"></span> UPLOAD

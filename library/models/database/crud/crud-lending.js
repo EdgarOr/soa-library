@@ -11,7 +11,18 @@ class LendingCRUD extends CRUD{
         this.model.find({}).populate('copy reader').exec((error, docs) => {
             callback(error, docs);
         });
-    };
+    }
+
+    findByReader(_reader, callback){
+    	this.model
+    	.find({ reader: _reader })
+    	.populate({
+    		path: 'copy',
+    		populate: { path: 'book' }
+ 		}).exec((error, docs) => {
+            callback(error, docs);
+        });
+    }
 }
 
 module.exports = new LendingCRUD();

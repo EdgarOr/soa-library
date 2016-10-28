@@ -6,9 +6,27 @@ const upload = multer();
 router
 //
     .get('/', function (req, res, next) {
-        LendingCRUD.find(function (error, docs) {
-            res.status(200).json(docs);
-        });
+
+        if (req.query.readerId) {
+            LendingCRUD.findByReader(req.query.readerId, (error, docs) => {
+                if(error){
+                    console.log(error);
+                    res.status(500).end();
+                    return;
+                }
+                if (docs) {
+                    res.status(200).json(docs);
+                }
+                else {
+                    res.status(500).end();
+                }
+            });
+        }
+        else {
+            LendingCRUD.find(function (error, docs) {
+                res.status(200).json(docs);
+            });
+        }
     })
     //
     .post('/', upload.none(), (req, res) => {

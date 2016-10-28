@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var states = 'ok damaged incomplete'.split(' ');
+var disponibilidades = 'available unavailable'.split(' ');
 var editions = 'First Second Third Fourth Fifth Sixth Seventh Eighth Ninth Tenth'.split(' ');
 var languages = 'English Spanish Mandarin Hindi German Russian Japanese'.split(' ');
 
@@ -11,14 +12,20 @@ var copySchema = {
         enum: states,
         required: true
     },
+    availability: {
+        type: String,
+        enum: disponibilidades,
+        required: true
+    },
     edition: {
         type: String,
         enum: editions
     },
-    publication_date: {type: Date},
+    publicatedAt: {type: Date},
     language: {
         type: String,
-        enum: languages
+        enum: languages,
+        required: true
     },
     book: {
         type: mongoose.Schema.Types.ObjectId,

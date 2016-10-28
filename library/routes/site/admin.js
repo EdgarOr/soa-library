@@ -27,6 +27,9 @@ get('/category-update', (req, res, next) => {
 get('/user-list', (req, res, next) => {
     res.sendFile('user/user-list-view.html', viewsRoot);
 }).
+get('/user-info', (req, res, next) => {
+    res.sendFile('user/user-info-view.html', viewsRoot);
+}).
 get('/user-create', (req, res, next) => {
     res.sendFile('user/user-create-view.html', viewsRoot);
 }).
@@ -48,8 +51,16 @@ get('/book-create', (req, res, next) => {
 get('/book-update', (req, res, next) => {
     res.sendFile('book/book-update-view.html', viewsRoot);
 }).
+get('/book-copy', (req, res, next) => {
+    res.sendFile('book/book-copy-create-view.html', viewsRoot);
+}).
+get('/book-lend', (req, res, next) => {
+    res.sendFile('lending/book-lend-view.html', viewsRoot);
+}).
 
-
+get('/lendings-list', (req, res, next) => {
+    res.sendFile('lending/lendings-list-view.html', viewsRoot);
+}).
 
 get('/response-dialog-view', (req, res, next) => {
     res.sendFile('response-dialog-view.html', viewsRoot);

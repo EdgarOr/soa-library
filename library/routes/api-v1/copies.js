@@ -8,16 +8,22 @@ router
     .get('/', function (req, res, next) {
         if (req.query.bookId) {
             CopyCRUD.findByBook(req.query.bookId, (error, docs) => {
-                if (docs) {
-                    res.status(200).json(docs);
-                }
-                else {
+                if(error){
+                    console.log(error.errors);
                     res.status(500).end();
+                    return;
                 }
+                res.status(200).json(docs);
+                
             });
         }
         else {
             CopyCRUD.findAll(function (error, docs) {
+                if(error){
+                    console.log(error);
+                    res.status(500).end();
+                    return;
+                }
                 res.status(200).json(docs);
             });
         }
@@ -27,6 +33,7 @@ router
         CopyCRUD.findById(req.params.id, function (error, docs) {
             if (error) {
                 console.log(error);
+                res.status(404).end();
                 return;
             }
             res.status(200).json(docs[0]);
