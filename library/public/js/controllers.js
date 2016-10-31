@@ -8,7 +8,12 @@ controller(
     ['$rootScope', '$scope', '$timeout', '$location', 'UserService', 'LendingService', 'CopyService', UserController]).
 controller(
     'BookController', 
-    ['$rootScope', '$scope', '$timeout', '$location', 'BookService', 'CategoryService', 'CopyService', BookController]);
+    ['$rootScope', '$scope', '$timeout', 
+    '$location', 'BookService', 'CategoryService', 
+    'CopyService', 'LendingService', '$route', BookController]).
+controller(
+    'LendingController',
+    ['$scope', 'LendingService', LendingController]);
 
 
 
@@ -141,7 +146,7 @@ function UserController($rootScope, $scope, $timeout, $location, userService, le
 }
 
 
-function BookController($rootScope, $scope, $timeout, $location, booksService, catsService, copiesService) {
+function BookController($rootScope, $scope, $timeout, $location, booksService, catsService, copiesService, lendingsService, $route) {
     var controller = GenericController($rootScope, $scope, $timeout, $location, booksService);
 
     var multipartConfig  = {
@@ -175,6 +180,15 @@ function BookController($rootScope, $scope, $timeout, $location, booksService, c
 
 
     $scope.newData = {cover: '/public/images/covers/generic-book-cover.jpg'};
+
+
+    catsService.getList((resp) => {
+        $scope.categories = resp.data;
+        $timeout(() => {
+            angular.element('#category-select').selectpicker('refresh');
+        }, 0);
+    });
+
 
     if($rootScope.bookInfo){
         $scope.bookInfo = angular.copy($rootScope.bookInfo);
@@ -210,12 +224,6 @@ function BookController($rootScope, $scope, $timeout, $location, booksService, c
         return abstract.substr(0, 150) + '...'
     }
 
-    catsService.getList((resp) => {
-        $scope.categories = resp.data;
-        $timeout(() => {
-            angular.element('#category-select').selectpicker('refresh');
-        }, 0);
-    });
 
     $scope.showInfo = (book) => {
         $rootScope.bookInfo = book;
@@ -240,7 +248,21 @@ function BookController($rootScope, $scope, $timeout, $location, booksService, c
         });
     };
 
+    $scope.returnBook = (copyId) => {
+        lendingsService.returnCopy(copyId, (response) => {
+            alert('Copy ' + copyId + 'returned');
+            $route.reload();
+        });
+    };
+
     controller.init();
+}
+
+function LendingController($scope, lendingsService){
+    lendingsService.getList((response) => {
+        $scope.lendings = response.data;
+    });
+
 }
 
 

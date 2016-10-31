@@ -9,7 +9,7 @@
 </style>
 
 <div class="jumbotron"><h1>Lendings</h1></div>
-
+<!--
 <article ng-repeat="book in dataList | filter : category" class="info-card col-xs-12 col-sm-4 col-md-4 ">
     <div class="panel panel-default">
 
@@ -63,9 +63,30 @@
 
     </div>
 </article>
-
+-->
+<table class="table table-responsive">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>User</th>
+            <th>Lent at</th>
+            <th>Date of return</th>
+            <th>Returned ?</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="lending in lendings">
+        <td ng-bind="lending.copy.book.title"></td>
+        <td ng-bind="lending.reader.name"></td>
+        <td ng-bind="lending.lentAt"></td>
+        <td ng-bind="lending.returnAt"></td>
+        <td><div ng-if="lending.copy.availability == 'available'">Yes</div><div ng-if="lending.copy.availability != 'available'">No</div></td>
+    </tr>
+    </tbody>
+</table>
+<!--
 <div class="fixed">
     <a class="floating-btn btn btn-primary" href="#book/new"><i class="material-icons">add</i></a>
 </div>
-
+-->
 <div ng-include="'/admin/delete-dialog-view'"></div>

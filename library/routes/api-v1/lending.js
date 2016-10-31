@@ -51,6 +51,25 @@ router
         });
     })
     //
+
+    .delete('/', (req, res) => {
+         if (req.query.copyId) {
+            console.log('Parámetro encontrado.');
+            LendingCRUD.deleteByCopy(req.query.copyId, (error, docs) => {
+                if(error){
+                    console.log(error);
+                    res.status(500).end();
+                    return;
+                }
+                res.status(200).end();
+                return;
+            });
+        }else{
+            console.log('Parámetro no encontrado.');
+            res.status(404).end();
+        }
+    })
+
     .delete('/:id', (req, res) => {
         LendingCRUD.delete(req.params.id, (error) => {
             if (error) {

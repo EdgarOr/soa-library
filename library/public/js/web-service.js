@@ -1,35 +1,3 @@
-function WebService ($http, consts) {
-
-  var WebService = {};
-
-  WebService.getList = function (url, onSuccess, onFail){
-  	$http.get(url).then(onSuccess, onFail);
-  };
-
-   WebService.getById = (url, id, onSuccess, onFail) => {
-    $http.get(url + '/' + id).then(onSuccess, onFail);
-  };
-
-  WebService.create = (url, docData, config) => {
-    return $http.post(url, docData, config);
-  };
-
-  WebService.update = (url, documentId, docData, onSuccess, onFail) => {
-  	$http
-  	.put(url + "/" + documentId, docData)
-  	.then(onSuccess, onFail);
-  };
-
-  WebService.delete = (url, documentId, onSuccess, onFail) => {
-  	$http
-  	.delete(url + "/" + documentId)
-  	.then(onSuccess, onFail);
-  };
-
-
-  return WebService;
-}
-
 function GenericService ($http, url) {
 
   var WebService = {
@@ -75,17 +43,8 @@ function CopyService ($http) {
 
   service.getByBook = (bookId, onSuccess, onError) => {
     $http.get(url + '?bookId=' + bookId).then(onSuccess, onError);
-  }
-  return service;
-}
+  };
 
-function CopyService ($http) {
-  var url = '/api/v1/copies';
-  var service = GenericService($http, url);
-
-  service.getByBook = (bookId, onSuccess, onError) => {
-    $http.get(url + '?bookId=' + bookId).then(onSuccess, onError);
-  }
   return service;
 }
 
@@ -95,15 +54,28 @@ function LendingService ($http) {
 
   service.getByReader = (readerId, onSuccess, onError) => {
     $http.get(url + '?readerId=' + readerId).then(onSuccess, onError);
-  }
+  };
+
+  service.deleteByCopy = (copyId, onSuccess, onError) => {
+    $http.delete(url + '?copyId=' + copyId).then(onSuccess, onError);
+  };
+
+  service.returnCopy = (copyId, onSuccess, onError) => {
+    var copy = { availability : 'available'};
+    var copyService = CopyService($http);
+    service.deleteByCopy(copyId, () => {
+       copyService.update(copyId, copy, onSuccess, onError);
+    });
+  };
+
   return service;
 }
 
 angular.
 	module('librarian.web-service', []).
-	factory('WebService' , ['$http', 'librarianConsts', WebService]).
   factory('CategoryService', ['$http', CategoryService]).
   factory('BookService', ['$http', BookService]).
   factory('LendingService', ['$http', LendingService]).
   factory('CopyService', ['$http', CopyService]).
-  factory('UserService', ['$http', UserService]);
+  factory('UserService', ['$http', UserService]).
+  factory('LendingService', ['$http', LendingService]);

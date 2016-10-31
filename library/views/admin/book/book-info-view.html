@@ -70,6 +70,7 @@
 							<td ng-bind="copy.edition"></td>
 							<td ng-bind="copy.language"></td>
 							<td ng-bind="copy.availability"></td>
+							<td> <div ng-if="copy.availability != 'available'" ><button class="btn btn-success btn-block" ng-disabled="" ng-click="returnBook(copy._id)">RETURN</button></div></td>
 						</tr> 
 					</tbody>
 				</table>

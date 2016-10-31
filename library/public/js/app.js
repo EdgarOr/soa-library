@@ -82,8 +82,8 @@ angular.module(
 
 
 		.when("/lendings/list", {
-			templateUrl : "lendings-list"
-			//,controller: "LendingsController"
+			templateUrl : "lendings-list",
+			controller: "LendingController"
 		});
 	}).
 

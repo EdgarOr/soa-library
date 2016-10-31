@@ -8,9 +8,7 @@ class LendingCRUD extends CRUD{
         super('Lending', schema);
     }
     find(callback) {
-        this.model.find({}).populate('copy reader').exec((error, docs) => {
-            callback(error, docs);
-        });
+        this.model.find({}).populate({path: 'copy reader', populate: {path: 'book'}}).exec(callback);
     }
 
     findByReader(_reader, callback){
@@ -19,9 +17,11 @@ class LendingCRUD extends CRUD{
     	.populate({
     		path: 'copy',
     		populate: { path: 'book' }
- 		}).exec((error, docs) => {
-            callback(error, docs);
-        });
+ 		}).exec(callback);
+    }
+
+    deleteByCopy(_copy, callback) {
+        this.model.remove({copy: _copy}, callback);
     }
 }
 
