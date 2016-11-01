@@ -2,32 +2,41 @@ angular.
 module('librarian.controller', ['librarian.web-service', 'librarian']).
 controller(
     'CategoryController', 
-    ['$rootScope', '$scope', '$timeout', '$location', 'CategoryService', CategoryController]).
+    ['$rootScope', '$scope', '$timeout', 
+    '$location', 'CategoryService', '$routeParams', CategoryController]).
 controller(
     'UserController', 
-    ['$rootScope', '$scope', '$timeout', '$location', 'UserService', 'LendingService', 'CopyService', UserController]).
+    ['$rootScope', '$scope', '$timeout', '$location', 
+    'UserService', 'LendingService', 'CopyService', '$routeParams', UserController]).
 controller(
     'BookController', 
     ['$rootScope', '$scope', '$timeout', 
     '$location', 'BookService', 'CategoryService', 
-    'CopyService', 'LendingService', '$route', BookController]).
+    'CopyService', 'LendingService', '$route', '$routeParams', BookController]).
 controller(
     'LendingController',
     ['$scope', 'LendingService', LendingController]);
 
-
-
-
-
-
-function CategoryController($rootScope, $scope, $timeout, $location, service) {
+function CategoryController($rootScope, $scope, $timeout, $location, service, $routeParams) {
     var controller = GenericController($rootScope, $scope, $timeout, $location, service);
     controller.redirectTo = '/category/list';
+
+    const editURL = /category\/[a-z0-9]{24}\/edit/;
+
+    if($location.path().match(editURL)){
+        service.getById($routeParams.catId, (response) => {
+            console.log('Retrieving book info to edit.');
+            $scope.dataToUpdate = response.data;
+        });
+
+    }
+
     controller.init();
 }
 
-
-function UserController($rootScope, $scope, $timeout, $location, userService, lendingService, copyService) {
+function UserController(
+    $rootScope, $scope, $timeout, $location, 
+    userService, lendingService, copyService, $routeParams) {
     var controller = GenericController($rootScope, $scope, $timeout, $location, userService);
 
     var multipartConfig  = {
@@ -60,28 +69,61 @@ function UserController($rootScope, $scope, $timeout, $location, userService, le
     controller.redirectTo = "/user/list";
 
 
-    if($rootScope.userInfo){
-        $scope.userInfo = angular.copy($rootScope.userInfo);
-        console.log('Setting up the user information')
-        lendingService.getByReader($scope.userInfo._id, (response) => {
-            $scope.userInfo.copies =  response.data;
+    const infoURL = /user\/[a-z0-9]{24}\/info/;
+    const editURL = /user\/[a-z0-9]{24}\/edit/;
+    const lendingURL = /user\/[a-z0-9]{24}\/lend/;
+
+    //If we are controlling the book/:bookId/info view
+    if($location.path().match(infoURL)){
+        // Check for book info in the routeScope
+        if($rootScope.userInfo){
+            $scope.userInfo = angular.copy($rootScope.userInfo);
+            lendingService.getByReader($scope.userInfo._id, (response) => {
+                $scope.userInfo.copies =  response.data;
+            });
+        } else if ($routeParams.userId){
+            userService.getById($routeParams.userId, (response) => {
+                $scope.userInfo = response.data;
+                lendingService.getByReader($scope.userInfo._id, (response) => {
+                    $scope.userInfo.copies =  response.data;
+                });
+            });
+        }
+
+     //If we are controlling the book/:bookId/edit view
+    } else if($location.path().match(editURL)){
+        userService.getById($routeParams.userId, (response) => {
+            console.log('Retrieving book info to edit.');
+            $scope.dataToUpdate = response.data;
         });
-    }
+     } else if($location.path().match(lendingURL)){
+    
+        function initUser(user ) {
+            $scope.userToLend = user;
+            user.completeName = user.name + " " + user.lastname;
+            user.borrowedBooks = 0;
+            user.lendingsExpired = 0;
+            $scope.userOk = true;
+            $scope.lending = {};
+            $scope.lending.authorizatedAt = new Date();
+            $scope.copyAvailable = true;
+        }
 
-    if($rootScope.userToLend){
-        console.log('There is a user to lend a book');
-        var user = angular.copy($rootScope.userToLend);
-        user.completeName = user.name + " " + user.lastname;
-        user.borrowedBooks = 0;
-        user.lendingsExpired = 0;
-        $scope.userToLend = user;
-        $scope.userOk = true;
+        if($rootScope.userToLend){
+            console.log('There is a user to lend a book');
+            var user = angular.copy($rootScope.userToLend);
+            initUser(user);
+        }else if ($routeParams.userId){
+            userService.getById($routeParams.userId, (response) => {
+                var user = response.data;
+                initUser(user);
+            });
+        }
 
-        $scope.lending = {};
-        $scope.lending.authorizatedAt = new Date();
+        
+     }
 
-        $scope.copyAvailable = true;
-    }
+    
 
     $scope.newData = {profilePhoto: '/public/images/profile-photos/default.png'};
     
@@ -146,13 +188,18 @@ function UserController($rootScope, $scope, $timeout, $location, userService, le
 }
 
 
-function BookController($rootScope, $scope, $timeout, $location, booksService, catsService, copiesService, lendingsService, $route) {
+function BookController(
+    $rootScope, $scope, $timeout, $location, booksService, 
+    catsService, copiesService, lendingsService, $route, $routeParams) {
     var controller = GenericController($rootScope, $scope, $timeout, $location, booksService);
 
+    //Configuration required to send images through the angular ajax request.
     var multipartConfig  = {
-            transformRequest: angular.identity,
-            headers: {'Content-Type': undefined}
+        transformRequest: angular.identity,
+        headers: {'Content-Type': undefined}
     }
+
+    //***********  Modifications to GenericController functions ********************************************
 
     controller.create = () => {
         angular.element('#wait-modal').modal('show');
@@ -170,44 +217,86 @@ function BookController($rootScope, $scope, $timeout, $location, booksService, c
 
     controller.resetCreateForm = () => {
         $scope.$apply(() => {
+            console.log('Reseting cover image');
+            $scope.newData = {cover: '/public/images/covers/generic-book-cover.jpg'};
             angular.element('#preview-img').attr('src', '/public/images/covers/generic-book-cover.jpg');
-            $scope.newData = {};
+            $timeout(() => {
+                angular.element('#category-select').selectpicker('refresh');
+            });
         });
     };
 
     controller.redirectTo = "/book/list";
 
-
+    //***********  Scope initialization ********************************************
 
     $scope.newData = {cover: '/public/images/covers/generic-book-cover.jpg'};
 
+    const infoURL = /book\/[a-z0-9]{24}\/info/;
+    const editURL = /book\/[a-z0-9]{24}\/edit/;
+    const copyURL = /book\/[a-z0-9]{24}\/copy/;
+    const newURL = /book\/new/;
 
-    catsService.getList((resp) => {
-        $scope.categories = resp.data;
-        $timeout(() => {
-            angular.element('#category-select').selectpicker('refresh');
-        }, 0);
-    });
+    //If we are controlling the book/:bookId/info view
+    if($location.path().match(infoURL)){
+        // Check for book info in the routeScope
+        if($rootScope.bookInfo){
+            $scope.bookInfo = angular.copy($rootScope.bookInfo);
+            copiesService.getByBook($scope.bookInfo._id, (response) => {
+                $scope.bookInfo.copies =  response.data;
+            });
+        // If not, then request the book info taken the routeParam bookInfoId
+        } else if ($routeParams.bookId){
+            booksService.getById($routeParams.bookIdForCreate, (response) => {
+                $scope.bookInfo = response.data;
+                copiesService.getByBook($scope.bookInfo._id, (response) => {
+                    $scope.bookInfo.copies =  response.data;
+                });
+            });
+        }
 
-
-    if($rootScope.bookInfo){
-        $scope.bookInfo = angular.copy($rootScope.bookInfo);
-        copiesService.getByBook($scope.bookInfo._id, (response) => {
-            $scope.bookInfo.copies =  response.data;
+     //If we are controlling the book/:bookId/edit view
+    } else if($location.path().match(editURL) || $location.path().match(newURL)){
+        catsService.getList((resp) => {
+            $scope.categories = resp.data;
+            $timeout(() => {
+                angular.element('#category-select').selectpicker('refresh');
+            }, 0);
         });
-    }
 
-    if($rootScope.bookToCopy){
-        $scope.bookToCopy = angular.copy($rootScope.bookToCopy);
-        $scope.defaultCopy = {
-            edition : 'First',
-            state : 'ok',
-            pages: 20,
-            availability: 'available',
-            language: 'English'
-        };
-        $scope.copy = angular.copy($scope.defaultCopy);
-    }
+        if($location.path().match(editURL)){
+            booksService.getById($routeParams.bookId, (response) => {
+                console.log('Retrieving book info to edit.');
+                $scope.dataToUpdate = response.data;
+            });
+        }
+
+     } else if($location.path().match(copyURL)){
+
+        function initDefaultCopy(bookId){
+            $scope.defaultCopy = {
+                book: bookId,
+                edition : 'First',
+                state : 'ok',
+                pages: 20,
+                availability: 'available',
+                language: 'English'
+            };
+        }
+
+        if($rootScope.bookToCopy){
+            $scope.bookToCopy = angular.copy($rootScope.bookToCopy);
+            initDefaultCopy($scope.bookToCopy._id);
+            $scope.copy = angular.copy($scope.defaultCopy);
+        }else{
+            booksService.getById($routeParams.bookId, (response) => {
+                console.log('Retrieving book info to create a copy.');
+                $scope.bookToCopy = response.data;
+                initDefaultCopy($scope.bookToCopy._id);
+                $scope.copy = angular.copy($scope.defaultCopy);
+            });
+        }
+     }
 
 
     $scope.showPreviewImg = (target, input) =>{
@@ -221,7 +310,7 @@ function BookController($rootScope, $scope, $timeout, $location, booksService, c
     };
 
     $scope.cutAbstract = (abstract) => {
-        return abstract.substr(0, 150) + '...'
+        return abstract.substr(0, 150) + '...';
     }
 
 
@@ -236,8 +325,6 @@ function BookController($rootScope, $scope, $timeout, $location, booksService, c
     $scope.createCopy = () =>{
         angular.element('#wait-modal').modal('show');
         var copy = angular.copy($scope.copy);
-        console.log(copy);
-        copy.book = $scope.bookToCopy._id;
         copiesService.create(copy, (response) => {
             angular.element('#wait-modal').modal('hide');
             controller.showResponseMessage('Success!', 'The copy was created.', () => {

@@ -25,11 +25,17 @@
                                 <input type="text" class="form-control" id="author" name="author" ng-model="newData.author" required> </div>
                                 <div class="col-xs-12">
                                     <label for="category">Category:</label>
-                                    <div load-categories-to-select>
-                                    <select id="category-select" class="form-control selectpicker" name="categories" ng-model="newData.categories" data-live-search="true" title="Choose the book categories" title="Choose the book categories" required multiple> 
-                                            <option ng-repeat="option in categories" value="{{option._id}}">{{option.name}}</option>
-                                            </select>
-                                    </div>
+                                    
+                                    <select 
+                                        id="category-select"
+                                        class="form-control selectpicker" 
+                                        name="categories" 
+                                        data-live-search="true" 
+                                        title="Choose the book categories"
+                                        ng-options="option.name for option in categories track by option._id"
+                                        ng-model="newData.categories"
+                                        required multiple> </select>
+                                  
                                 </div>
                                 <div class="col-xs-12">
                                     <label for="description">Description:</label>

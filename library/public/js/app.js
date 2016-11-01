@@ -30,7 +30,7 @@ angular.module(
 			templateUrl : "category-create",
 			controller: "CategoryController"
 		})
-		.when("/category/:categoryId/edit", {
+		.when("/category/:catId/edit", {
 			templateUrl : "category-update",
 			controller: "CategoryController",
 			controllerAs: 'CatCont'
