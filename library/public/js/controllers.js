@@ -226,6 +226,20 @@ function BookController(
         });
     };
 
+
+    controller.setupToDelete = (elementId) => {
+            $scope.elementToDelete = elementId;
+            $scope.deleteMessage = 'All the data related to this book will be deleted.';
+    };
+
+    controller.delete = () => {
+            booksService.delete($scope.elementToDelete, 
+                controller.succesCallbackToDelete, 
+                controller.errorCallback
+            );
+            $scope.deleteMessage = '';
+        }
+
     controller.redirectTo = "/book/list";
 
     //***********  Scope initialization ********************************************
@@ -310,7 +324,7 @@ function BookController(
     };
 
     $scope.cutAbstract = (abstract) => {
-        return abstract.substr(0, 150) + '...';
+        return abstract.substr(0, 100) + '...';
     }
 
 
