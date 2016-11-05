@@ -1,6 +1,7 @@
 "use strict";
 
 const schema = require('../schema/schema-copy');
+const LendingCRUD = require('./crud-lending');
 const CRUD = require('./crud-class');
 class CopyCRUD extends CRUD {
     constructor() {
@@ -11,19 +12,25 @@ class CopyCRUD extends CRUD {
             callback(error, docs);
         });
     }
+    
     findByBook(bookId, callback) {
-        this.model.find({
-            book: bookId
-        }, (error, doc) => {
-            callback(error, doc);
+        this.model.find({book: bookId}, callback);
+    }
+
+    findById(id, callback) {
+        this.model.find({_id: id}, callback).populate('book');
+    }
+
+    delete(id, callback) {
+        LendingCRUD.model.remove({copy: id}, (error, docsRemoved) => {
+            if(callback){
+                this.model.remove({_id: id}, callback);
+            }else{
+                this.model.remove({_id: id}).exec();
+            }
         });
     }
-    findById(id, callback) {
-        this.model.find({
-            _id: id
-        }, (error, doc) => {
-            callback(error, doc);
-        }).populate('book');
-    }
+
+
 }
 module.exports = new CopyCRUD();

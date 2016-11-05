@@ -1,6 +1,8 @@
 "use strict";
 
 const schema = require('../schema/schema-book');
+const CopyCRUD = require('./crud-copy');
+const LendingCRUD = require('./crud-lending');
 const CRUDClass = require('./crud-class');
 
 class BookCRUD extends CRUDClass {
@@ -16,6 +18,21 @@ class BookCRUD extends CRUDClass {
     findById(bookId, callback){
         this.model.find({_id: bookId}).populate('categories').exec((error, docs) =>{
            callback(error, docs); 
+        });
+    }
+
+    delete(id, callback) {
+        var bookModel = this.model;
+        CopyCRUD.model.find({book: id}, (error, docs) => {
+            docs.forEach((doc) => {
+                CopyCRUD.delete(doc._id);
+                /*
+                LendingCRUD.model.remove({copy: doc._id}, (error, docsRemoved) => {
+                    CopyCRUD.model.remove({_id: doc._id}).exec();
+                });
+                */
+            });
+            bookModel.remove({_id: id}, callback);
         });
     }
 }

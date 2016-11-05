@@ -50,7 +50,6 @@ router
         if (req.file) 
             req.body.cover_photo = '/' + req.file.path;
         
-      
         CRUD.update(req.params.id, req.body, (error, doc) => {
             if (error) {
                 console.log(error);

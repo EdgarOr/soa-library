@@ -72,7 +72,7 @@
 				-->
 			</div>
 			<div class="col-xs-12 col-sm-4">
-				<figure> <img id="preview-img" class="img-responsive center-block" src="{{userToLend.profilePhoto}}" alt="User profile photo" width="60%" /> </figure>
+				<figure> <img id="preview-img" class="img-responsive center-block" ng-src="{{userToLend.profilePhoto}}" alt="User profile photo" width="60%" /> </figure>
 			</div>
 		</div>
 	</fieldset>
@@ -111,7 +111,7 @@
 					<div class="form-group row">
 					<div class="col-xs-12 col-md-4">
 						<label for="pub-date">Publication Date</label>
-						<input type="date" class="form-control" ng-model="copyToLend.publicatedAt" disabled="true"/>
+						<input type="text" class="form-control" ng-model="copyToLend.publicatedAt" disabled="true"/>
 					</div>
 					<div class="col-xs-12 col-md-4">
 						<label for="edition">Edition</label>

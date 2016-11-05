@@ -34,7 +34,7 @@
                         <ul class="dropdown-menu">
                             <li><a ng-href='#book/{{book._id}}/copy' ng-click='setBookToCopy(book);'>Add a copy</a></li>
                             <li><a ng-href='#book/{{book._id}}/edit' ng-click="setupToUpdate(book);">Edit</a></li>
-                            <li><a class='list-group-item popup-list-item' data-toggle='modal' data-target='#delete-modal' ng-click='setupToDelete(book._id);'>Delete</a></li>
+                            <li><a href="" data-toggle='modal' data-target='#delete-modal' ng-click='setupToDelete(book._id);'>Delete</a></li>
                         </ul>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                     <p>{{book.author}}</p>
                 </div>
                 <div class="col-sm-5 col-md-5 col-lg-5 hidden-xs">
-                    <figure> <img class="img-thumbnail center-block cover-image" src="{{book.cover_photo}}" onclick="setupModalImage(this);" alt="Book´s cover" width="150" data-toggle="modal" data-target="#modal" />
+                    <figure> <img class="img-thumbnail center-block cover-image" ng-src="{{book.cover_photo}}" onclick="setupModalImage(this);" alt="Book´s cover" width="150" data-toggle="modal" data-target="#modal" />
                         <figcaption>
                             <h4>Cover photo</h4></figcaption>
                         </figure>

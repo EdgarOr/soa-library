@@ -245,9 +245,9 @@ function BookController(
             copiesService.getByBook($scope.bookInfo._id, (response) => {
                 $scope.bookInfo.copies =  response.data;
             });
-        // If not, then request the book info taken the routeParam bookInfoId
+        // If not, request the book info with the routeParam "bookId"
         } else if ($routeParams.bookId){
-            booksService.getById($routeParams.bookIdForCreate, (response) => {
+            booksService.getById($routeParams.bookId, (response) => {
                 $scope.bookInfo = response.data;
                 copiesService.getByBook($scope.bookInfo._id, (response) => {
                     $scope.bookInfo.copies =  response.data;
@@ -337,7 +337,14 @@ function BookController(
 
     $scope.returnBook = (copyId) => {
         lendingsService.returnCopy(copyId, (response) => {
-            alert('Copy ' + copyId + 'returned');
+            alert('Copy ' + copyId + ' returned');
+            $route.reload();
+        });
+    };
+
+    $scope.deleteCopy = (copyId) => {
+        copiesService.delete(copyId, (response) => {
+            alert('Copy ' + copyId + ' deleted');
             $route.reload();
         });
     };
@@ -377,7 +384,10 @@ function GenericController($rootScope, $scope, $timeout, $location, service) {
         },
 
         delete: () => {
-            service.delete($scope.elementToDelete, controller.succesCallbackToDelete, controller.errorCallback);
+            service.delete($scope.elementToDelete, 
+                controller.succesCallbackToDelete, 
+                controller.errorCallback
+            );
         },
 
         setupToUpdate: (data) => {
