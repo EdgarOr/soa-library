@@ -26,11 +26,6 @@ class BookCRUD extends CRUDClass {
         CopyCRUD.model.find({book: id}, (error, docs) => {
             docs.forEach((doc) => {
                 CopyCRUD.delete(doc._id);
-                /*
-                LendingCRUD.model.remove({copy: doc._id}, (error, docsRemoved) => {
-                    CopyCRUD.model.remove({_id: doc._id}).exec();
-                });
-                */
             });
             bookModel.remove({_id: id}, callback);
         });

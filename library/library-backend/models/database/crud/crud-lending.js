@@ -9,6 +9,7 @@ class LendingCRUD extends CRUD{
     }
     find(callback) {
         this.model.find({}).populate({path: 'copy reader', populate: {path: 'book'}}).exec(callback);
+        //this.model.find({}).populate({path: 'copy reader'}).populate({path : 'copy.book'}).exec(callback);
     }
 
     findByReader(_reader, callback){

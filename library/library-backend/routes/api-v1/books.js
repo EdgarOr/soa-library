@@ -1,7 +1,9 @@
 const express = require('express');
 const CRUD = require('../../models/database/db-interface').BookCRUD;
+const multer = require('multer');
+const fs     = require('fs');
+
 const router = express.Router();
-const multer = require('multer'); // v1.0.5
 const upload = multer();
 var uploading = multer({
     dest: './public/images/covers/'
@@ -10,6 +12,23 @@ var uploading = multer({
         , files: 1
     }
 , });
+
+/*
+function removeImage(bookId){
+
+    CRUD.model
+        .findOne( {_id : bookId} )
+        .select('cover_photo')
+        .exec((error, book) => {
+            fs.unlink(book.cover_photo, function(err) {
+               if (err) {
+                  return console.error(err);
+               }
+               console.log("File deleted successfully!");
+            });
+        });
+}*/
+
 router
 //
     .get('/', function (req, res, next) {
@@ -56,11 +75,13 @@ router
                 res.status(500).end();
                 return;
             }
+
             res.status(200).json(doc);
         });
     })
     //
     .delete('/:id', (req, res) => {
+        
         CRUD.delete(req.params.id, (error) => {
             if (error) {
                 console.log(error);

@@ -68,6 +68,10 @@ get('/response-dialog-view', (req, res, next) => {
 
 get('/delete-dialog-view', (req, res, next) => {
     res.sendFile('delete-dialog-view.html', viewsRoot);
+})
+
+.get('/dialog-component', (req, res, next) => {
+    res.sendFile('dialog-component.html', viewsRoot);  
 });
 
 

@@ -6,9 +6,7 @@
             overflow: hidden;
         }
 
-       
-
-    </style>
+</style>
 
 <div class="jumbotron"><h1>Book Catalog</h1></div>
 <div class="row">
@@ -21,7 +19,8 @@
         <h2> Filtering by category: <span ng-bind="category || 'None'"></span></h2>
     </div>
 </div>
-    <article ng-repeat="book in dataList | filter : category" class="info-card col-xs-12 col-sm-4 col-md-4 ">
+
+    <article ng-repeat="book in dataList | filter : category" class="info-card repeated-item col-xs-12 col-sm-4 col-md-4 ">
     <div class="panel panel-default">
 
         <header class="panel-heading">
@@ -50,7 +49,7 @@
                     <p>{{book.author}}</p>
                 </div>
                 <div class="col-sm-5 col-md-5 col-lg-5 hidden-xs">
-                    <figure> <img class="img-thumbnail center-block cover-image" ng-src="{{imageFromBackend(book.cover_photo)}}" onclick="setupModalImage(this);" alt="Book´s cover" width="100" data-toggle="modal" data-target="#modal" />
+                    <figure> <img class="img-thumbnail center-block cover-image" ng-src="{{imageFromBackend(book.cover_photo)}}" onclick="setupModalImage(this);" alt="Book´s cover" width="80" data-toggle="modal" data-target="#modal" />
                         <figcaption>
                             <h4>Cover photo</h4></figcaption>
                         </figure>
@@ -74,6 +73,7 @@
 
         </div>
     </article>
+
 <div class="fixed">
     <a class="floating-btn btn btn-primary" href="#book/new"><i class="material-icons">add</i></a>
 </div>

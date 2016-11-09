@@ -9,61 +9,6 @@
 </style>
 
 <div class="jumbotron"><h1>Lendings</h1></div>
-<!--
-<article ng-repeat="book in dataList | filter : category" class="info-card col-xs-12 col-sm-4 col-md-4 ">
-    <div class="panel panel-default">
-
-        <header class="panel-heading">
-            <div class="row">
-                <div class="col-xs-10"><strong>{{remainingDays}}</strong> Days left</div>
-                <div class="col-xs-2"> 
-                    <div class="dropdown">
-                        <span class="glyphicon glyphicon-option-vertical pull-right options-menu dropdown-toggle" 
-                        data-toggle="dropdown"></span>
-                        <ul class="dropdown-menu">
-                            <li><a ng-href='#book/{{book._id}}/copy' ng-click='setBookToCopy(book);'>Add a copy</a></li>
-                            <li><a ng-href='#book/{{book._id}}/edit' ng-click="setupToUpdate(book);">Edit</a></li>
-                            <li><a class='list-group-item popup-list-item' data-toggle='modal' data-target='#delete-modal' ng-click='setupToDelete(book._id);'>Delete</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <section class="panel-body">
-            <div class="row">
-                <div class="col-sm-7 col-md-7 col-lg-7">
-                    <h4>Title</h4>
-                    <p>{{book.title}}</p>
-                    <h4>Author</h4>
-                    <p>{{book.author}}</p>
-                </div>
-                <div class="col-sm-5 col-md-5 col-lg-5 hidden-xs">
-                    <figure> <img class="img-thumbnail center-block cover-image" ng-src="{{book.cover_photo}}" onclick="setupModalImage(this);" alt="Book´s cover" width="150" data-toggle="modal" data-target="#modal" />
-                        <figcaption>
-                            <h4>Cover photo</h4></figcaption>
-                        </figure>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h4>Description</h4>
-                        <p>{{cutAbstract(book.description)}}</p>
-                    </div>
-                </div>
-            </section>
-
-            <div class="panel-footer">
-                <a 
-                ng-href="#book/{{book._id}}/info" 
-                ng-click="showInfo(book);"
-                class="btn btn-primary" > MORE INFO
-            </a>
-        </div>
-
-    </div>
-</article>
--->
 <table class="table table-responsive table-bordered">
     <thead>
         <tr>
@@ -71,7 +16,6 @@
             <th>User</th>
             <th>Lent at</th>
             <th>Date of return</th>
-            <th>Returned ?</th>
         </tr>
     </thead>
     <tbody>
@@ -80,13 +24,6 @@
         <td ng-bind="lending.reader.name"></td>
         <td ng-bind="lending.lentAt"></td>
         <td ng-bind="lending.returnAt"></td>
-        <td><div ng-if="lending.copy.availability == 'available'">Yes</div><div ng-if="lending.copy.availability != 'available'">No</div></td>
     </tr>
     </tbody>
 </table>
-<!--
-<div class="fixed">
-    <a class="floating-btn btn btn-primary" href="#book/new"><i class="material-icons">add</i></a>
-</div>
--->
-<div ng-include="'/admin/delete-dialog-view'"></div>

@@ -141,7 +141,7 @@
   height: 55px;
   outline: none;
   font-size: 30px;
-  box-shadow: 0px 6px 5px #999999;
+  box-shadow: 0px 6px 5px #666666;
   -webkit-transition: width 0.5s; /* Safari */
   transition: width 0.5s;
   -webkit-transition: height 0.5s; /* Safari */
@@ -149,12 +149,12 @@
 }
 
 .floating-btn:hover {
-  box-shadow: 0px 7px 6px #999999;
+  box-shadow: 0px 7px 6px #666666;
   outline: none !important;
 }
 
 .floating-btn:focus, .floating-btn:active {
-   box-shadow: 0px 7px 6px #999999;
+   box-shadow: 0px 7px 6px #666666;
   outline: none !important;
 }
 
